@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Homemade+Apple&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0a0f18;}
+.fs { font-family:'Roboto',sans-serif; background:#0a0f18; overflow:hidden; position:relative; color:#f5f0e6; min-height:100vh; box-sizing:border-box; }
+.fs-marble { position:absolute; inset:0; opacity:0.55; pointer-events:none; }
+.fs-nav-wrap { display:flex; justify-content:center; padding:22px 0 0; position:relative; z-index:5; }
+.fs-nav { display:flex; align-items:center; gap:22px; background:rgba(15,22,32,0.65); backdrop-filter:blur(12px); border:1px solid rgba(212,183,74,0.15); border-radius:6px; padding:12px 20px; font-weight:700; }
+.fs-brand { color:#f5f0e6; font-size:14px; letter-spacing:2px; padding-right:20px; border-right:1px solid rgba(245,240,230,0.15); display:flex; align-items:center; gap:8px; }
+.fs-brand-mark { color:#d4b74a; font-size:15px; }
+.fs-nav-item { color:rgba(245,240,230,0.55); font-size:11px; letter-spacing:2px; cursor:pointer; transition:color 0.3s; }
+.fs-nav-item:hover, .fs-nav-item.active { color:#d4b74a; }
+.fs-nav-lang { color:rgba(245,240,230,0.5); font-size:11px; letter-spacing:2px; padding-left:14px; border-left:1px solid rgba(245,240,230,0.15); }
+.fs-nav-lang b { color:#d4b74a; }
+.fs-cta { background:transparent; border:1px solid rgba(245,240,230,0.4); color:#f5f0e6; padding:7px 14px; font-family:'Roboto',sans-serif; font-weight:700; font-size:10px; letter-spacing:2px; border-radius:4px; cursor:pointer; margin-left:6px; }
+.fs-cta:hover { background:#d4b74a; color:#0a0f18; border-color:#d4b74a; }
+.fs-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; padding:80px 60px 100px; position:relative; z-index:2; align-items:center; }
+.fs-copy { max-width:440px; }
+.fs-copy h2 { font-weight:700; font-size:52px; line-height:1; letter-spacing:-1.5px; margin:0 0 36px; color:#ffffff; }
+.fs-copy p { font-size:14px; line-height:1.75; color:rgba(245,240,230,0.85); font-weight:400; margin:0 0 22px; max-width:420px; }
+.fs-founders { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:44px; }
+.fs-founder-sig { font-family:'Homemade Apple', cursive; color:#f5f0e6; font-size:26px; margin-bottom:14px; line-height:1; }
+.fs-founder-name { color:rgba(245,240,230,0.9); font-size:12px; font-weight:400; letter-spacing:0.2px; line-height:1.5; }
+.fs-photo { position:relative; height:440px; border-radius:8px; overflow:hidden; box-shadow:0 30px 80px rgba(0,0,0,0.6); }
+.fs-photo-bg { position:absolute; inset:0; background:linear-gradient(135deg, #2d3d55 0%, #1a2332 40%, #0a0f18 100%); }
+/* PHOTO SLOT: B&W Islamabad skyline 5:4 2400x1920 — replace .fs-photo-bg with img cover */
+.fs-photo-veil { position:absolute; inset:0; background:linear-gradient(180deg, transparent 55%, rgba(10,15,24,0.6) 100%); }
+.fs-photo-cap { position:absolute; bottom:16px; left:16px; right:16px; display:flex; justify-content:space-between; align-items:flex-end; z-index:3; color:#f5f0e6; font-weight:700; }
+.fs-photo-cap b { display:block; font-size:11px; letter-spacing:2px; margin-bottom:3px; }
+.fs-photo-cap span { font-size:9px; letter-spacing:2px; color:rgba(245,240,230,0.55); font-weight:400; }
+.fs-photo-cap-r { color:#d4b74a; font-size:9px; letter-spacing:2px; text-align:right; font-weight:700; }
+</style>
+</head><body>
+<div class="fs">
+  <svg class="fs-marble" viewBox="0 0 1400 700" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <linearGradient id="ve1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d4b74a" stop-opacity="0"/><stop offset="0.5" stop-color="#d4b74a" stop-opacity="0.55"/><stop offset="1" stop-color="#d4b74a" stop-opacity="0"/></linearGradient>
+      <linearGradient id="ve2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a68b30" stop-opacity="0"/><stop offset="0.5" stop-color="#a68b30" stop-opacity="0.4"/><stop offset="1" stop-color="#a68b30" stop-opacity="0"/></linearGradient>
+    </defs>
+    <path d="M-50,80 Q200,30 400,120 T780,140 T1180,80 T1500,120" stroke="url(#ve1)" stroke-width="1.8" fill="none" opacity="0.55"/>
+    <path d="M-50,220 Q250,170 500,260 T900,240 T1500,280" stroke="url(#ve2)" stroke-width="1.4" fill="none" opacity="0.45"/>
+    <path d="M-50,380 Q300,320 550,410 T1000,380 T1500,420" stroke="url(#ve1)" stroke-width="1.6" fill="none" opacity="0.4"/>
+    <path d="M-50,540 Q220,480 480,560 T900,530 T1500,580" stroke="url(#ve2)" stroke-width="1.2" fill="none" opacity="0.35"/>
+    <path d="M240,-40 Q320,180 260,380 T300,720" stroke="url(#ve1)" stroke-width="0.9" fill="none" opacity="0.25"/>
+    <path d="M920,-40 Q1000,280 940,480 T980,720" stroke="url(#ve2)" stroke-width="0.9" fill="none" opacity="0.25"/>
+  </svg>
+
+  <div class="fs-nav-wrap"><div class="fs-nav">
+    <div class="fs-brand"><span class="fs-brand-mark">&#9670;</span>DYNAMIC</div>
+    <div class="fs-nav-item">HOME</div><div class="fs-nav-item">SERVICES</div>
+    <div class="fs-nav-item">WORK</div><div class="fs-nav-item active">ABOUT</div>
+    <div class="fs-nav-lang"><b>EN</b> / UR</div>
+    <button class="fs-cta">CONTACT</button>
+  </div></div>
+
+  <div class="fs-grid">
+    <div class="fs-copy">
+      <h2>FROM ISLAMABAD,<br>SINCE 2011</h2>
+      <p>We understand the poetry of your design, the proportions, textures and light behind every line.</p>
+      <p>We deliver the engineering with discipline: one partner, one touchpoint, full responsibility.</p>
+      <p>Made in Pakistan by master artisans, our work protects your vision, your timelines and your reputation.</p>
+      <div class="fs-founders">
+        <div><div class="fs-founder-sig">Asher Farooq</div><div class="fs-founder-name">Asher Farooq, Co-Founder<br>and CEO</div></div>
+        <div><div class="fs-founder-sig">M. Khan</div><div class="fs-founder-name">M. Khan, Co-Founder<br>and Executive Chairman</div></div>
+      </div>
+    </div>
+    <div class="fs-photo">
+      <div class="fs-photo-bg"></div>
+      <div class="fs-photo-veil"></div>
+      <div class="fs-photo-cap">
+        <div><b>ISLAMABAD · PK</b><span>B&W · ARCHIVE</span></div>
+        <div class="fs-photo-cap-r">5:4<br>2400 × 1920</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body></html>

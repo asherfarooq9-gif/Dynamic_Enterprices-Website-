@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0a0a0a;}
+.wm { font-family:'Roboto',sans-serif; font-weight:700; background:#0a0a0a; overflow:hidden; padding:60px 0 36px; position:relative; }
+.wm-title { color:#f5f0e6; font-size:44px; line-height:0.95; letter-spacing:-1.2px; margin:0 0 60px; padding:0 40px; max-width:500px; }
+.wm-strip { position:relative; padding:16px 0 20px; }
+.wm-ticker { position:absolute; left:40px; right:40px; height:6px; display:flex; justify-content:space-between; align-items:center; }
+.wm-ticker-top { top:0; }
+.wm-ticker-bot { bottom:0; }
+.wm-ticker span { width:1px; height:5px; background:rgba(245,240,230,0.18); }
+.wm-scroll { overflow:hidden; }
+.wm-scroll::before, .wm-scroll::after { content:''; position:absolute; top:16px; bottom:20px; width:60px; z-index:4; pointer-events:none; }
+.wm-scroll::before { left:0; background:linear-gradient(90deg, #0a0a0a, transparent); }
+.wm-scroll::after { right:0; background:linear-gradient(-90deg, #0a0a0a, transparent); }
+.wm-track { display:flex; gap:14px; width:max-content; animation:mq 38s linear infinite; padding:8px 40px; }
+.wm-strip:hover .wm-track { animation-play-state:paused; }
+@keyframes mq { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+.wm-item { flex-shrink:0; width:170px; }
+.wm-photo { width:170px; height:200px; border-radius:5px; overflow:hidden; position:relative; transition:transform 0.5s cubic-bezier(0.22,1,0.36,1); cursor:pointer; box-shadow:0 12px 30px rgba(0,0,0,0.5); }
+.wm-photo:hover { transform:scale(1.1); z-index:5; box-shadow:0 24px 55px rgba(0,0,0,0.8), 0 0 0 1px #d4b74a; }
+.wm-bg { position:absolute; inset:0; }
+/* PHOTO SLOT: set background-image:url(...) cover on .wm-bg, remove gradient class */
+.wm-veil { position:absolute; inset:0; background:linear-gradient(180deg, transparent 55%, rgba(0,0,0,0.75) 100%); opacity:0; transition:opacity 0.4s; }
+.wm-photo:hover .wm-veil { opacity:1; }
+.wm-name { position:absolute; bottom:10px; left:10px; right:10px; z-index:2; color:#f5f0e6; opacity:0; transform:translateY(4px); transition:all 0.4s 0.1s; }
+.wm-photo:hover .wm-name { opacity:1; transform:translateY(0); }
+.wm-name b { display:block; font-size:12px; letter-spacing:-0.2px; margin-bottom:2px; }
+.wm-name span { font-size:7px; letter-spacing:2px; color:#d4b74a; }
+.wm-code { text-align:center; margin-top:12px; color:rgba(245,240,230,0.55); font-size:10px; letter-spacing:3px; }
+.bg-a { background:linear-gradient(135deg, #2d3d55, #1a2332 60%, #0f1620); }
+.bg-b { background:linear-gradient(135deg, #3d3320, #5c4620 40%, #1a2332); }
+.bg-c { background:linear-gradient(180deg, #1a3a5c, #0f2438); }
+.bg-d { background:linear-gradient(135deg, #4a3d20, #2d2515); }
+.bg-e { background:linear-gradient(135deg, #1e2a3d, #0f1620); }
+.bg-f { background:linear-gradient(135deg, #6b5628, #2d2515); }
+</style>
+</head><body>
+<div class="wm">
+  <h2 class="wm-title">WORK THAT<br>SPEAKS FOR US</h2>
+  <div class="wm-strip">
+    <div class="wm-ticker wm-ticker-top"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="wm-scroll">
+      <div class="wm-track" id="wmTrack">
+        <!-- JS below duplicates this set for seamless loop -->
+        <div class="wm-item"><div class="wm-photo"><div class="wm-bg bg-a"></div><div class="wm-veil"></div><div class="wm-name"><b>Bahria Heights</b><span>INTERIOR · 2024</span></div></div><div class="wm-code">BH</div></div>
+        <div class="wm-item"><div class="wm-photo"><div class="wm-bg bg-b"></div><div class="wm-veil"></div><div class="wm-name"><b>Serena Suites</b><span>HOSPITALITY · 2024</span></div></div><div class="wm-code">SS</div></div>
+        <div class="wm-item"><div class="wm-photo"><div class="wm-bg bg-c"></div><div class="wm-veil"></div><div class="wm-name"><b>Centaurus Lounge</b><span>FILM · 2024</span></div></div><div class="wm-code">CL</div></div>
+        <div class="wm-item"><div class="wm-photo"><div class="wm-bg bg-d"></div><div class="wm-veil"></div><div class="wm-name"><b>DHA Villa</b><span>RESIDENTIAL · 2023</span></div></div><div class="wm-code">DV</div></div>
+        <div class="wm-item"><div class="wm-photo"><div class="wm-bg bg-e"></div><div class="wm-veil"></div><div class="wm-name"><b>Islamabad Club</b><span>HOSPITALITY · 2023</span></div></div><div class="wm-code">IC</div></div>
+        <div class="wm-item"><div class="wm-photo"><div class="wm-bg bg-f"></div><div class="wm-veil"></div><div class="wm-name"><b>Marriott Studio</b><span>FILM · 2024</span></div></div><div class="wm-code">MS</div></div>
+        <div class="wm-item"><div class="wm-photo"><div class="wm-bg bg-a"></div><div class="wm-veil"></div><div class="wm-name"><b>Emirates Tower</b><span>CORPORATE · 2023</span></div></div><div class="wm-code">ET</div></div>
+        <div class="wm-item"><div class="wm-photo"><div class="wm-bg bg-b"></div><div class="wm-veil"></div><div class="wm-name"><b>Al Habib Manor</b><span>RESIDENTIAL · 2023</span></div></div><div class="wm-code">AHM</div></div>
+      </div>
+    </div>
+    <div class="wm-ticker wm-ticker-bot"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  </div>
+  <script>
+    // Duplicate track children once for seamless -50% loop
+    const track = document.getElementById('wmTrack');
+    track.innerHTML += track.innerHTML;
+  </script>
+</div>
+</body></html>

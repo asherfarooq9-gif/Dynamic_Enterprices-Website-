@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-navy: #1a2332;
+    --color-navy-light: #2d3d55;
+    --color-navy-deep: #0f1620;
+    --color-navy-deeper: #0a0f18;
+    --color-navy-black: #060a12;
+    --color-mustard: #d4b74a;
+    --color-mustard-dark: #a68b30;
+    --color-cream: #f5f0e6;
+    --color-cream-warm: #e8dcc0;
+
+    --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-power: cubic-bezier(0.22, 1, 0.36, 1);
+    --duration-fast: 150ms;
+    --duration-normal: 300ms;
+    --duration-slow: 800ms;
+
+    --nav-height: 4.5rem;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-white font-sans text-body font-normal text-navy;
+    overflow-x: hidden;
+  }
+
+  /* Headings are always 700 and always tightly tracked. There is no
+     mid-weight, mid-tracking heading anywhere in this system — that is
+     the single rule keeping Roboto from reading like a dashboard. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-bold text-navy;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--color-mustard);
+    color: var(--color-navy);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-mustard);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Lenis */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-shell px-gutter;
+  }
+
+  .section-y {
+    padding-top: theme('spacing.section');
+    padding-bottom: theme('spacing.section');
+  }
+
+  /* The 9–11px tracked cap label. Sits at the far end of the scale jump
+     from the 72–120px headline — the contrast IS the hierarchy. */
+  .eyebrow {
+    @apply text-eyebrow font-bold uppercase;
+  }
+
+  .rule-hair {
+    @apply h-px w-full bg-navy/10;
+  }
+
+  .text-gradient-navy {
+    background: linear-gradient(
+      135deg,
+      #2d3d55 0%,
+      #1a2332 45%,
+      #3d5273 75%,
+      #1a2332 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .surface-card {
+    @apply rounded-xl bg-cream-paper/85 shadow-soft ring-1 ring-navy/[0.06];
+  }
+}
+
+@layer utilities {
+  .will-transform {
+    will-change: transform;
+  }
+  .will-opacity {
+    will-change: opacity;
+  }
+}
+
+/* Motion is a garnish, never a dependency. Everything below degrades to a
+   static, fully legible page. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

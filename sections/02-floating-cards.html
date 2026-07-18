@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#060a12;}
+.fc { font-family:'Roboto',sans-serif; font-weight:700; background:#0a0f18; overflow:hidden; position:relative; padding:24px 24px 60px; min-height:100vh; box-sizing:border-box; }
+.fc-bg { position:absolute; inset:0; opacity:0.15; pointer-events:none; }
+.fc-glow { position:absolute; top:20%; right:-10%; width:500px; height:500px; border-radius:50%; background:radial-gradient(circle, rgba(212,183,74,0.12), transparent 60%); pointer-events:none; }
+.fc-glow2 { position:absolute; bottom:-10%; left:-10%; width:400px; height:400px; border-radius:50%; background:radial-gradient(circle, rgba(45,61,85,0.4), transparent 60%); pointer-events:none; }
+.fc-nav-wrap { display:flex; justify-content:center; position:relative; z-index:10; margin-bottom:60px; }
+.fc-nav { display:flex; align-items:center; gap:22px; background:rgba(15,22,32,0.6); backdrop-filter:blur(12px); border:1px solid rgba(212,183,74,0.15); border-radius:6px; padding:12px 20px; }
+.fc-brand { color:#f5f0e6; font-size:15px; letter-spacing:2px; padding-right:20px; border-right:1px solid rgba(245,240,230,0.15); display:flex; align-items:center; gap:8px; }
+.fc-brand-mark { color:#d4b74a; font-size:16px; }
+.fc-nav-item { color:rgba(245,240,230,0.55); font-size:12px; letter-spacing:2px; cursor:pointer; transition:color 0.3s; }
+.fc-nav-item:hover, .fc-nav-item.active { color:#d4b74a; }
+.fc-nav-lang { color:rgba(245,240,230,0.5); font-size:11px; letter-spacing:2px; padding-left:16px; border-left:1px solid rgba(245,240,230,0.15); }
+.fc-nav-lang b { color:#d4b74a; }
+.fc-cta { background:transparent; border:1px solid rgba(245,240,230,0.4); color:#f5f0e6; padding:8px 16px; font-family:'Roboto',sans-serif; font-weight:700; font-size:11px; letter-spacing:2px; border-radius:4px; cursor:pointer; margin-left:8px; }
+.fc-cta:hover { background:#d4b74a; color:#0a0f18; border-color:#d4b74a; }
+.fc-stage { position:relative; height:420px; display:flex; align-items:center; justify-content:center; }
+.fc-card { position:absolute; border-radius:8px; overflow:hidden; box-shadow:0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(212,183,74,0.08); transition:all 0.6s cubic-bezier(0.22,1,0.36,1); cursor:pointer; }
+.fc-card:hover { transform:translateY(-8px) rotate(0deg) scale(1.02) !important; box-shadow:0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px #d4b74a; z-index:20; }
+.fc-c1 { width:280px; height:320px; left:24px; top:50px; transform:rotate(-3deg); z-index:2; }
+.fc-c2 { width:360px; height:360px; left:50%; top:0; transform:translateX(-50%) rotate(0deg); z-index:3; }
+.fc-c3 { width:260px; height:330px; right:24px; top:60px; transform:rotate(3deg); z-index:2; }
+.fc-c4 { width:200px; height:200px; right:40px; bottom:-30px; transform:rotate(-2deg); z-index:1; opacity:0.85; }
+.fc-cb { position:absolute; inset:0; }
+.fc-cb-a { background:linear-gradient(135deg, #4a5570 0%, #1a2332 60%, #0f1620 100%); }
+.fc-cb-b { background:linear-gradient(135deg, #3d3320 0%, #6b5628 40%, #1a2332 100%); }
+.fc-cb-c { background:linear-gradient(180deg, #1a3a5c 0%, #0f2438 60%, #05141f 100%); }
+.fc-cb-d { background:linear-gradient(135deg, #5c4820 0%, #2d2312 100%); }
+.fc-veil { position:absolute; inset:0; background:linear-gradient(180deg, transparent 40%, rgba(10,15,24,0.5) 100%); }
+.fc-label { position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background:#f5f0e6; color:#0a0f18; padding:8px 16px; border-radius:4px; font-size:12px; letter-spacing:3px; box-shadow:0 6px 20px rgba(0,0,0,0.4); z-index:3; white-space:nowrap; }
+.fc-label-sm { font-size:10px; letter-spacing:2px; padding:6px 12px; }
+.fc-c4 .fc-label { background:#d4b74a; }
+/* REPLACE: set your photo as background-image on .fc-cb, remove the gradient class */
+.fc-tag-tl { position:absolute; top:14px; left:14px; font-size:9px; letter-spacing:2px; color:rgba(212,183,74,0.85); z-index:2; }
+.fc-corner-mark { position:absolute; bottom:14px; left:14px; right:14px; display:flex; justify-content:space-between; z-index:2; font-size:9px; letter-spacing:2px; color:rgba(245,240,230,0.6); }
+.fc-btm { position:absolute; bottom:24px; left:24px; right:24px; display:flex; justify-content:space-between; align-items:flex-end; z-index:10; }
+.fc-btm-l { color:rgba(245,240,230,0.5); font-size:10px; letter-spacing:3px; }
+.fc-btm-l b { color:#d4b74a; }
+.fc-btm-m { text-align:center; }
+.fc-btm-m-title { color:#f5f0e6; font-size:32px; letter-spacing:-1px; line-height:1; margin:0; }
+.fc-btm-m-sub { color:rgba(245,240,230,0.5); font-size:10px; letter-spacing:3px; margin-top:6px; }
+.fc-btm-r { display:flex; flex-direction:column; align-items:flex-end; gap:6px; }
+.fc-btm-r-num { color:#d4b74a; font-size:28px; letter-spacing:-1px; line-height:1; }
+.fc-btm-r-txt { color:rgba(245,240,230,0.5); font-size:9px; letter-spacing:3px; }
+</style>
+</head><body>
+<div class="fc">
+  <svg class="fc-bg" viewBox="0 0 680 620" preserveAspectRatio="xMidYMid slice">
+    <defs><pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#d4b74a" stroke-width="0.3"/>
+    </pattern></defs>
+    <rect width="680" height="620" fill="url(#grid)"/>
+    <line x1="0" y1="200" x2="680" y2="180" stroke="#d4b74a" stroke-width="0.4" opacity="0.4"/>
+    <line x1="0" y1="500" x2="680" y2="480" stroke="#d4b74a" stroke-width="0.4" opacity="0.4"/>
+    <line x1="340" y1="0" x2="340" y2="620" stroke="#f5f0e6" stroke-width="0.3" opacity="0.3"/>
+  </svg>
+  <div class="fc-glow"></div><div class="fc-glow2"></div>
+
+  <div class="fc-nav-wrap"><div class="fc-nav">
+    <div class="fc-brand"><span class="fc-brand-mark">&#9670;</span>DYNAMIC</div>
+    <div class="fc-nav-item">HOME</div>
+    <div class="fc-nav-item active">SERVICES</div>
+    <div class="fc-nav-item">WORK</div>
+    <div class="fc-nav-item">ABOUT</div>
+    <div class="fc-nav-lang"><b>EN</b> / UR</div>
+    <button class="fc-cta">CONTACT</button>
+  </div></div>
+
+  <div class="fc-stage">
+    <div class="fc-card fc-c1">
+      <div class="fc-cb fc-cb-a"></div><!-- PHOTO SLOT: 4:5 1600x2000 -->
+      <div class="fc-veil"></div>
+      <div class="fc-tag-tl">01</div>
+      <div class="fc-label">INTERIOR</div>
+      <div class="fc-corner-mark"><span>ISLAMABAD</span><span>2024</span></div>
+    </div>
+    <div class="fc-card fc-c2">
+      <div class="fc-cb fc-cb-b"></div><!-- PHOTO SLOT: 1:1 1600x1600 -->
+      <div class="fc-veil"></div>
+      <div class="fc-tag-tl">02</div>
+      <div class="fc-label">SUPPLIES</div>
+      <div class="fc-corner-mark"><span>SOURCED · PK</span><span>FEATURED</span></div>
+    </div>
+    <div class="fc-card fc-c3">
+      <div class="fc-cb fc-cb-c"></div><!-- PHOTO SLOT: 4:5 / video loop -->
+      <div class="fc-veil"></div>
+      <div class="fc-tag-tl">03</div>
+      <div class="fc-label">FILMS</div>
+      <div class="fc-corner-mark"><span>4K MP4</span><span>2024</span></div>
+    </div>
+    <div class="fc-card fc-c4">
+      <div class="fc-cb fc-cb-d"></div><!-- PHOTO SLOT: 1:1 -->
+      <div class="fc-veil"></div>
+      <div class="fc-tag-tl" style="color:rgba(10,15,24,0.7);">04</div>
+      <div class="fc-label fc-label-sm">EVENTS</div>
+    </div>
+  </div>
+
+  <div class="fc-btm">
+    <div class="fc-btm-l">EST · MMXI<br><b>MADE IN ISLAMABAD</b></div>
+    <div class="fc-btm-m">
+      <p class="fc-btm-m-title">DYNAMIC ENTERPRISES</p>
+      <div class="fc-btm-m-sub">FOR INTERIOR · SUPPLIES · FILMS · EVENTS</div>
+    </div>
+    <div class="fc-btm-r"><div class="fc-btm-r-num">04</div><div class="fc-btm-r-txt">DISCIPLINES</div></div>
+  </div>
+</div>
+</body></html>
