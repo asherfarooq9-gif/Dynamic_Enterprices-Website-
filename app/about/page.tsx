@@ -6,12 +6,16 @@ import { ClientsWall } from '@/components/about/ClientsWall';
 import { FinalCta } from '@/components/home/FinalCta';
 import { Reveal } from '@/components/motion/Reveal';
 import { MISSION, VISION } from '@/content/about';
-import { SITE } from '@/lib/site';
+
+const ABOUT_DESCRIPTION =
+  'Dynamic Enterprises is a Karachi-based multi-discipline studio founded in 2017 — meet the team, mission and values behind the work.';
 
 export const metadata: Metadata = {
   title: 'About',
-  description: `The studio, the mission and the people behind it — ${SITE.description}`,
+  description: ABOUT_DESCRIPTION,
   alternates: { canonical: '/about' },
+  openGraph: { title: 'About', description: ABOUT_DESCRIPTION },
+  twitter: { title: 'About', description: ABOUT_DESCRIPTION },
 };
 
 export default function AboutPage() {

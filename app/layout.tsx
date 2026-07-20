@@ -3,6 +3,7 @@ import { Roboto, Homemade_Apple } from 'next/font/google';
 import './globals.css';
 
 import { SITE } from '@/lib/site';
+import { TESTIMONIALS } from '@/content/about';
 import { Nav } from '@/components/layout/Nav';
 import { Footer } from '@/components/layout/Footer';
 import { ServiceSwitcher } from '@/components/services/ServiceSwitcher';
@@ -35,11 +36,11 @@ export const metadata: Metadata = {
   },
   description: SITE.description,
   keywords: [
-    'interior design Islamabad',
+    'interior design Karachi',
     'turnkey interiors Pakistan',
     'FF&E procurement Pakistan',
     'architectural films',
-    'event production Islamabad',
+    'corporate event production Pakistan',
   ],
   openGraph: {
     type: 'website',
@@ -65,19 +66,39 @@ export default function RootLayout({
 }) {
   const organizationSchema = {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
+    '@type': 'ProfessionalService',
     name: SITE.name,
     url: SITE.url,
+    logo: `${SITE.url}/images/logo.png`,
+    image: `${SITE.url}/images/logo.png`,
     email: SITE.email,
     telephone: SITE.phone,
     foundingDate: String(SITE.founded),
     address: {
       '@type': 'PostalAddress',
+      streetAddress: SITE.address,
       addressLocality: SITE.city,
+      addressRegion: 'Sindh',
       addressCountry: SITE.country,
     },
     description: SITE.description,
+    sameAs: ['https://www.instagram.com/dynamicenterprises25'],
   };
+
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE.name,
+    url: SITE.url,
+  };
+
+  const reviewSchema = TESTIMONIALS.map((testimonial) => ({
+    '@context': 'https://schema.org',
+    '@type': 'Review',
+    itemReviewed: { '@type': 'ProfessionalService', name: SITE.name },
+    reviewBody: testimonial.quote,
+    author: { '@type': 'Person', name: testimonial.author },
+  }));
 
   return (
     <html lang="en" className={`${roboto.variable} ${script.variable}`}>
@@ -88,6 +109,21 @@ export default function RootLayout({
             __html: JSON.stringify(organizationSchema),
           }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteSchema),
+          }}
+        />
+        {reviewSchema.map((review, i) => (
+          <script
+            key={i}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(review),
+            }}
+          />
+        ))}
 
         <LoadingScreen />
         <ScrollProgress />

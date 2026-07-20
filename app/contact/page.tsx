@@ -4,10 +4,15 @@ import { ContactForm } from '@/components/contact/ContactForm';
 import { Reveal } from '@/components/motion/Reveal';
 import { SITE } from '@/lib/site';
 
+const CONTACT_DESCRIPTION =
+  "Get in touch with Dynamic Enterprises in Karachi — call, email or visit the studio for interior, supplies, film or uniform projects.";
+
 export const metadata: Metadata = {
   title: 'Contact',
-  description: `Get in touch — ${SITE.description}`,
+  description: CONTACT_DESCRIPTION,
   alternates: { canonical: '/contact' },
+  openGraph: { title: 'Contact', description: CONTACT_DESCRIPTION },
+  twitter: { title: 'Contact', description: CONTACT_DESCRIPTION },
 };
 
 export default function ContactPage() {

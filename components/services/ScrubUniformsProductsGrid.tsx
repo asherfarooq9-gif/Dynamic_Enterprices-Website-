@@ -23,7 +23,7 @@ export function ScrubUniformsProductsGrid() {
               ratio="4:5"
               aspectRatio="1538/1024"
               src="/images/services/scrub-uniforms-products/1.jpg"
-              alt="Scrub & Uniforms product"
+              alt="Medical scrub and hospitality uniform range supplied by Dynamic Enterprises"
               zoom
               sizes="(max-width: 768px) 100vw, 32rem"
               className="rounded-lg shadow-large"

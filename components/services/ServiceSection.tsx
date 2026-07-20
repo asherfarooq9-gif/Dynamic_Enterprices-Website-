@@ -8,6 +8,8 @@ interface ServiceSectionProps {
   service: Service;
   /** Even index sits on white, odd on cream — the same light-curve rhythm as Home. */
   index: number;
+  /** Set 'h1' when this section carries the page's only heading (no video hero above it). Defaults to 'h2'. */
+  headingLevel?: 'h1' | 'h2';
 }
 
 /**
@@ -17,7 +19,7 @@ interface ServiceSectionProps {
  * `service.id` so the Home services cards (`/services#interior` etc.) land
  * directly on their section.
  */
-export function ServiceSection({ service, index }: ServiceSectionProps) {
+export function ServiceSection({ service, index, headingLevel = 'h2' }: ServiceSectionProps) {
   const isReversed = index % 2 === 1;
 
   return (
@@ -59,7 +61,7 @@ export function ServiceSection({ service, index }: ServiceSectionProps) {
             </span>
 
             <SplitText
-              as="h2"
+              as={headingLevel}
               text={service.title.toUpperCase()}
               className="text-section uppercase text-navy"
             />

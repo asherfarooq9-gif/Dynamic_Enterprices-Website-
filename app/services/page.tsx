@@ -3,12 +3,16 @@ import { ServicesHero } from '@/components/services/ServicesHero';
 import { ServiceOptionCard } from '@/components/services/ServiceOptionCard';
 import { FinalCta } from '@/components/home/FinalCta';
 import { SERVICES } from '@/content/services';
-import { SITE } from '@/lib/site';
+
+const SERVICES_DESCRIPTION =
+  'Four disciplines, one studio: turnkey interiors, FF&E procurement, corporate and architectural films, and bulk uniforms — all in Karachi.';
 
 export const metadata: Metadata = {
   title: 'Services',
-  description: `Interior, supplies, corporate films and uniforms — ${SITE.description}`,
+  description: SERVICES_DESCRIPTION,
   alternates: { canonical: '/services' },
+  openGraph: { title: 'Services', description: SERVICES_DESCRIPTION },
+  twitter: { title: 'Services', description: SERVICES_DESCRIPTION },
 };
 
 /**

@@ -26,8 +26,17 @@ export function generateMetadata({ params }: ServiceDetailPageProps): Metadata {
 
   return {
     title: service.title,
-    description: `${service.short} — ${SITE.description}`,
+    description: service.metaDescription,
     alternates: { canonical: `/services/${service.id}` },
+    openGraph: {
+      title: `${service.title} — ${SITE.name}`,
+      description: service.metaDescription,
+      url: `${SITE.url}/services/${service.id}`,
+    },
+    twitter: {
+      title: `${service.title} — ${SITE.name}`,
+      description: service.metaDescription,
+    },
   };
 }
 
@@ -41,8 +50,35 @@ export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
   const service = SERVICES.find((s) => s.id === params.slug);
   if (!service) notFound();
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Services', item: `${SITE.url}/services` },
+      { '@type': 'ListItem', position: 2, name: service.title, item: `${SITE.url}/services/${service.id}` },
+    ],
+  };
+
+  const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    serviceType: service.title,
+    provider: { '@type': 'ProfessionalService', name: SITE.name, url: SITE.url },
+    areaServed: { '@type': 'City', name: SITE.city },
+    description: service.metaDescription,
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+
       {service.heroVideo ? (
         <ServiceVideoHero
           title={service.title}
@@ -65,7 +101,11 @@ export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
         </div>
       )}
 
-      <ServiceSection service={service} index={0} />
+      <ServiceSection
+        service={service}
+        index={0}
+        headingLevel={service.heroVideo ? 'h2' : 'h1'}
+      />
 
       {service.id === 'interior' && (
         <>
