@@ -3,17 +3,27 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
+import { FaCouch, FaBoxOpen, FaFilm, FaTshirt } from 'react-icons/fa';
+import type { IconType } from 'react-icons';
 import { EASE } from '@/lib/motion';
 import { SERVICES } from '@/content/services';
 import { cn } from '@/lib/cn';
 
+const SERVICE_ICONS: Record<string, IconType> = {
+  interior: FaCouch,
+  supplies: FaBoxOpen,
+  'corporate-films': FaFilm,
+  'scrub-uniforms': FaTshirt,
+};
+
 /**
  * Pinned to the bottom of the viewport on every page so a visitor can jump
- * discipline-to-discipline from anywhere. Full-width, four equal cells from
- * `sm` up; the active cell carries a tinted fill plus a mustard top edge
- * (shared `layoutId`, so it slides between cells on navigation instead of
- * snapping). Below `sm` it stays horizontally scrollable so four labels
- * never get crushed on a narrow phone.
+ * discipline-to-discipline from anywhere. Four equal cells, always. Below
+ * `sm` each cell collapses to just its icon (an app-style tab bar — four
+ * text labels don't fit a phone width without crushing); `sm` and up shows
+ * the icon's index + label instead. The active cell carries a tinted fill
+ * plus a mustard top edge (shared `layoutId`, so it slides between cells on
+ * navigation instead of snapping).
  */
 export function ServiceSwitcher() {
   const pathname = usePathname();
@@ -23,32 +33,45 @@ export function ServiceSwitcher() {
       aria-label="Switch service"
       className="fixed inset-x-0 bottom-0 z-40 border-t border-navy/10 bg-white shadow-[0_-4px_24px_rgba(10,15,24,0.08)]"
     >
-      <ul className="flex overflow-x-auto sm:grid sm:grid-cols-4">
+      <ul className="grid grid-cols-4">
         {SERVICES.map((service) => {
           const href = `/services/${service.id}`;
           const isActive = pathname === href;
+          const Icon = SERVICE_ICONS[service.id];
 
           return (
-            <li key={service.id} className="relative shrink-0 sm:shrink">
+            <li key={service.id} className="relative">
               <Link
                 href={href}
                 aria-current={isActive ? 'page' : undefined}
+                aria-label={service.title}
                 className={cn(
-                  'flex items-center justify-center gap-2.5 whitespace-nowrap px-6 py-5 text-[0.6875rem] font-bold uppercase tracking-[0.22em] transition-colors duration-normal sm:w-full',
+                  'flex flex-col items-center justify-center gap-1 px-2 py-3 text-[0.6875rem] font-bold uppercase tracking-[0.22em] transition-colors duration-normal sm:flex-row sm:gap-2.5 sm:px-6 sm:py-5',
                   isActive
                     ? 'bg-navy/[0.04] text-navy'
                     : 'text-navy/45 hover:text-mustard-dark',
                 )}
               >
+                {Icon && (
+                  <Icon
+                    aria-hidden
+                    className={cn(
+                      'text-lg sm:hidden',
+                      isActive ? 'text-mustard-dark' : 'text-navy/40',
+                    )}
+                  />
+                )}
                 <span
                   className={cn(
-                    'text-[0.625rem] font-normal tracking-normal',
+                    'hidden text-[0.625rem] font-normal tracking-normal sm:inline',
                     isActive ? 'text-mustard-dark' : 'text-navy/25',
                   )}
                 >
                   {service.index}
                 </span>
-                {service.title}
+                <span className="hidden whitespace-nowrap sm:inline">
+                  {service.title}
+                </span>
               </Link>
 
               {isActive && (
