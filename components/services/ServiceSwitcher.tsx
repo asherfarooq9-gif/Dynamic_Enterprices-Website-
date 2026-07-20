@@ -8,11 +8,12 @@ import { SERVICES } from '@/content/services';
 import { cn } from '@/lib/cn';
 
 /**
- * Sits directly under every service detail hero so a visitor can jump
- * discipline-to-discipline without dropping back to the hub. The active tab's
- * mustard underline is a shared `layoutId`, so switching tabs slides the bar
- * across instead of snapping — the one moment of motion in an otherwise
- * static, sticky strip.
+ * Pinned to the bottom of the viewport on every page so a visitor can jump
+ * discipline-to-discipline from anywhere. Full-width, four equal cells from
+ * `sm` up; the active cell carries a tinted fill plus a mustard top edge
+ * (shared `layoutId`, so it slides between cells on navigation instead of
+ * snapping). Below `sm` it stays horizontally scrollable so four labels
+ * never get crushed on a narrow phone.
  */
 export function ServiceSwitcher() {
   const pathname = usePathname();
@@ -20,50 +21,48 @@ export function ServiceSwitcher() {
   return (
     <nav
       aria-label="Switch service"
-      className="sticky top-0 z-40 border-b border-navy/10 bg-white/95 backdrop-blur-sm"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-navy/10 bg-white shadow-[0_-4px_24px_rgba(10,15,24,0.08)]"
     >
-      <div className="shell">
-        <ul className="flex gap-1 overflow-x-auto">
-          {SERVICES.map((service) => {
-            const href = `/services/${service.id}`;
-            const isActive = pathname === href;
+      <ul className="flex overflow-x-auto sm:grid sm:grid-cols-4">
+        {SERVICES.map((service) => {
+          const href = `/services/${service.id}`;
+          const isActive = pathname === href;
 
-            return (
-              <li key={service.id} className="relative shrink-0">
-                <Link
-                  href={href}
-                  aria-current={isActive ? 'page' : undefined}
+          return (
+            <li key={service.id} className="relative shrink-0 sm:shrink">
+              <Link
+                href={href}
+                aria-current={isActive ? 'page' : undefined}
+                className={cn(
+                  'flex items-center justify-center gap-2.5 whitespace-nowrap px-6 py-5 text-[0.6875rem] font-bold uppercase tracking-[0.22em] transition-colors duration-normal sm:w-full',
+                  isActive
+                    ? 'bg-navy/[0.04] text-navy'
+                    : 'text-navy/45 hover:text-mustard-dark',
+                )}
+              >
+                <span
                   className={cn(
-                    'flex items-center gap-2.5 whitespace-nowrap px-5 py-6 text-[0.6875rem] font-bold uppercase tracking-[0.22em] transition-colors duration-normal sm:px-6',
-                    isActive
-                      ? 'text-navy'
-                      : 'text-navy/40 hover:text-mustard-dark',
+                    'text-[0.625rem] font-normal tracking-normal',
+                    isActive ? 'text-mustard-dark' : 'text-navy/25',
                   )}
                 >
-                  <span
-                    className={cn(
-                      'text-[0.625rem] font-normal tracking-normal',
-                      isActive ? 'text-mustard-dark' : 'text-navy/25',
-                    )}
-                  >
-                    {service.index}
-                  </span>
-                  {service.title}
-                </Link>
+                  {service.index}
+                </span>
+                {service.title}
+              </Link>
 
-                {isActive && (
-                  <motion.span
-                    aria-hidden
-                    layoutId="service-switcher-underline"
-                    className="absolute inset-x-5 -bottom-px h-[3px] rounded-full bg-mustard-dark sm:inset-x-6"
-                    transition={{ duration: 0.5, ease: EASE.expo }}
-                  />
-                )}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+              {isActive && (
+                <motion.span
+                  aria-hidden
+                  layoutId="service-switcher-indicator"
+                  className="absolute inset-x-0 top-0 h-[3px] bg-mustard-dark"
+                  transition={{ duration: 0.5, ease: EASE.expo }}
+                />
+              )}
+            </li>
+          );
+        })}
+      </ul>
     </nav>
   );
 }

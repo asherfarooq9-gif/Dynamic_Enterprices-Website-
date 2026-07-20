@@ -101,11 +101,14 @@ export default function RootLayout({
 
         <SmoothScroll>
           <Nav />
-          <ServiceSwitcher />
           <PageTransition>
             <main id="main">{children}</main>
             <Footer />
           </PageTransition>
+          {/* Spacer so the fixed bottom ServiceSwitcher never overlaps the
+              footer's own content/links. */}
+          <div aria-hidden className="h-[3.75rem] sm:h-[4.25rem]" />
+          <ServiceSwitcher />
         </SmoothScroll>
       </body>
     </html>
