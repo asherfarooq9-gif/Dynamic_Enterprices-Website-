@@ -32,12 +32,13 @@ export function Nav() {
 
   return (
     <>
-      {/* A compact, centred pill — not a stretched bar. Width is content-driven
-          (w-fit) with a cap, so it reads as an object floating over the hero
-          rather than a strip spanning it. The near-black fill plus a hairline
-          ring gives it real contrast against the navy hero behind it. */}
+      {/* Apple-style glass bar: transparent/frosted rather than a solid fill,
+          so the hero (always the dark navy `bg-hero-radial` treatment on
+          every page) shows through with blur. Full-width on phones for a
+          wider touch target; settles back into a compact centred pill from
+          `sm` up. */}
       <motion.header
-        className="fixed left-1/2 top-4 z-[80] w-fit max-w-[calc(100vw-2rem)] rounded-full bg-white shadow-premium ring-1 ring-navy/10 backdrop-blur-sm sm:top-6"
+        className="fixed left-1/2 top-4 z-[80] w-[calc(100vw-2rem)] max-w-[calc(100vw-2rem)] rounded-full bg-navy/35 shadow-premium ring-1 ring-white/15 backdrop-blur-xl sm:top-6 sm:w-fit"
         // Framer writes its own inline `transform`, which would otherwise wipe
         // out a Tailwind `-translate-x-1/2` class on the same element — so the
         // horizontal centering travels with Framer's x value instead.
@@ -47,7 +48,7 @@ export function Nav() {
       >
         <nav
           aria-label="Main navigation"
-          className="flex h-14 items-center gap-6 px-5 sm:h-16 sm:gap-10 sm:px-7"
+          className="flex h-14 items-center justify-between gap-6 px-5 sm:h-16 sm:gap-10 sm:px-7"
         >
           <Link href="/" aria-label={SITE.name} className="flex items-center">
             <Image
@@ -73,8 +74,8 @@ export function Nav() {
                     href={link.href}
                     aria-current={isActive ? 'page' : undefined}
                     className={cn(
-                      'group relative block py-1 text-[0.6875rem] font-bold uppercase tracking-[0.22em] text-navy/60 transition-colors duration-normal hover:text-mustard-dark',
-                      isActive && 'text-navy',
+                      'group relative block py-1 text-[0.6875rem] font-bold uppercase tracking-[0.22em] text-white/70 transition-colors duration-normal hover:text-mustard',
+                      isActive && 'text-white',
                     )}
                   >
                     {link.label}
@@ -98,7 +99,7 @@ export function Nav() {
           <div className="flex items-center gap-6">
             <Link
               href="/contact"
-              className="hidden rounded-full px-6 py-2.5 text-[0.625rem] font-bold uppercase tracking-[0.22em] text-navy ring-1 ring-navy/25 transition-colors duration-normal hover:bg-mustard hover:text-navy hover:ring-mustard md:block"
+              className="hidden rounded-full px-6 py-2.5 text-[0.625rem] font-bold uppercase tracking-[0.22em] text-white ring-1 ring-white/30 transition-colors duration-normal hover:bg-mustard hover:text-navy hover:ring-mustard md:block"
             >
               Contact
             </Link>
@@ -114,16 +115,16 @@ export function Nav() {
                 className={cn(
                   'h-px transition-all duration-normal ease-expo',
                   isMenuOpen
-                    ? 'w-6 translate-y-[3.5px] rotate-45 bg-navy'
-                    : 'w-6 bg-navy',
+                    ? 'w-6 translate-y-[3.5px] rotate-45 bg-white'
+                    : 'w-6 bg-white',
                 )}
               />
               <span
                 className={cn(
                   'h-px transition-all duration-normal ease-expo',
                   isMenuOpen
-                    ? 'w-6 -translate-y-[3.5px] -rotate-45 bg-navy'
-                    : 'w-4 bg-navy',
+                    ? 'w-6 -translate-y-[3.5px] -rotate-45 bg-white'
+                    : 'w-4 bg-white',
                 )}
               />
             </button>
@@ -134,13 +135,16 @@ export function Nav() {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            className="fixed inset-0 z-[75] flex flex-col justify-center bg-navy md:hidden"
+            className="fixed inset-0 z-[75] flex flex-col overflow-y-auto bg-navy md:hidden"
             initial={{ clipPath: 'inset(0 0 100% 0)' }}
             animate={{ clipPath: 'inset(0 0 0% 0)' }}
             exit={{ clipPath: 'inset(0 0 100% 0)' }}
             transition={{ duration: 0.6, ease: EASE.expo }}
           >
-            <ul className="shell space-y-2">
+            {/* `m-auto` centres the list when it fits the viewport and lets it
+                scroll from the top when the options overflow (long lists,
+                short/landscape viewports) instead of clipping. */}
+            <ul className="shell m-auto w-full space-y-2 py-24">
               {[...NAV_LINKS, { href: '/contact', label: 'Contact' }].map(
                 (link, i) => (
                   <motion.li

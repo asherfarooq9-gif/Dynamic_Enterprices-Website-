@@ -205,7 +205,7 @@ export function ServicesCards() {
         </div>
 
         <div className="mt-24 flex flex-col items-center gap-8 border-t border-navy/10 pt-8 text-center sm:flex-row sm:justify-center sm:gap-20">
-          <p className="text-[0.625rem] uppercase tracking-[0.25em] text-navy/45">
+          <p className="text-[0.75rem] uppercase tracking-[0.25em] text-navy/45">
             Est · {SITE.foundedRoman}
             <br />
             <b className="text-mustard-dark">Made in {SITE.city}</b>
@@ -213,17 +213,17 @@ export function ServicesCards() {
 
           <p
             id="services-heading"
-            className="text-[clamp(1.5rem,1rem+1.5vw,2rem)] font-bold uppercase tracking-[-0.03em] text-navy"
+            className="text-[clamp(1.75rem,1.25rem+1.5vw,2.25rem)] font-bold uppercase tracking-[-0.03em] text-navy"
           >
             {SITE.name}
-            <span className="mt-2 block text-[0.625rem] font-normal uppercase tracking-[0.25em] text-navy/45">
+            <span className="mt-2 block text-[0.75rem] font-normal uppercase tracking-[0.25em] text-navy/45">
               For interior · supplies · corporate films · uniforms
             </span>
           </p>
 
-          <p className="text-[1.75rem] font-bold leading-none tracking-[-0.03em] text-mustard-dark">
+          <p className="text-[2.25rem] font-bold leading-none tracking-[-0.03em] text-mustard-dark">
             04
-            <span className="mt-2 block text-[0.5625rem] font-normal uppercase tracking-[0.25em] text-navy/45">
+            <span className="mt-2 block text-[0.6875rem] font-normal uppercase tracking-[0.25em] text-navy/45">
               Disciplines
             </span>
           </p>

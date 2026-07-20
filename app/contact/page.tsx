@@ -37,14 +37,22 @@ export default function ContactPage() {
               <p className="max-w-prose text-lead text-navy/80">{SITE.address}</p>
             </div>
 
-            <PhotoSlot
-              ratio="16:9"
-              placeholder="dusk"
-              caption={SITE.city}
-              subcaption="Map"
-              className="rounded-lg"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(SITE.address)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Open ${SITE.address} in Google Maps`}
+              className="group block"
+            >
+              <PhotoSlot
+                ratio="16:9"
+                placeholder="dusk"
+                caption={SITE.city}
+                subcaption="Tap to open in Maps"
+                className="rounded-lg transition-transform duration-500 ease-expo group-hover:scale-[1.01]"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </a>
           </Reveal>
         </div>
       </section>
