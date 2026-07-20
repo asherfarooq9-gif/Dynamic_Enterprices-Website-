@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { ContactHero } from '@/components/contact/ContactHero';
 import { ContactForm } from '@/components/contact/ContactForm';
-import { PhotoSlot } from '@/components/ui/PhotoSlot';
 import { Reveal } from '@/components/motion/Reveal';
 import { SITE } from '@/lib/site';
 
@@ -37,22 +36,25 @@ export default function ContactPage() {
               <p className="max-w-prose text-lead text-navy/80">{SITE.address}</p>
             </div>
 
-            <a
-              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(SITE.address)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Open ${SITE.address} in Google Maps`}
-              className="group block"
-            >
-              <PhotoSlot
-                ratio="16:9"
-                placeholder="dusk"
-                caption={SITE.city}
-                subcaption="Tap to open in Maps"
-                className="rounded-lg transition-transform duration-500 ease-expo group-hover:scale-[1.01]"
-                sizes="(max-width: 1024px) 100vw, 50vw"
+            <div className="relative aspect-video overflow-hidden rounded-lg ring-1 ring-navy/10">
+              <iframe
+                title={`Map: ${SITE.address}`}
+                src={`https://www.google.com/maps?q=${encodeURIComponent(SITE.address)}&output=embed`}
+                className="absolute inset-0 h-full w-full border-0"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
               />
-            </a>
+
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(SITE.address)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open ${SITE.address} in Google Maps`}
+                className="absolute bottom-4 right-4 rounded-full bg-navy/90 px-4 py-2 text-[0.625rem] font-bold uppercase tracking-[0.2em] text-white shadow-large backdrop-blur-sm transition-colors hover:bg-mustard hover:text-navy"
+              >
+                Open in Maps
+              </a>
+            </div>
           </Reveal>
         </div>
       </section>

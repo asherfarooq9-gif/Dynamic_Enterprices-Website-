@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -50,15 +49,14 @@ export function Nav() {
           aria-label="Main navigation"
           className="flex h-14 items-center justify-between gap-6 px-5 sm:h-16 sm:gap-10 sm:px-7"
         >
-          <Link href="/" aria-label={SITE.name} className="flex items-center">
-            <Image
-              src="/images/logo.jpg"
-              alt={SITE.name}
-              width={112}
-              height={125}
-              priority
-              className="h-10 w-auto sm:h-12"
-            />
+          <Link
+            href="/"
+            aria-label={SITE.name}
+            className="flex items-center whitespace-nowrap text-[0.9375rem] font-bold uppercase tracking-[0.08em] text-white sm:text-lg"
+          >
+            Dynamic
+            <span className="mx-1.5 text-mustard">&middot;</span>
+            Enterprises
           </Link>
 
           <ul className="hidden items-center gap-10 md:flex">
