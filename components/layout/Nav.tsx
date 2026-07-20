@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -52,11 +53,22 @@ export function Nav() {
           <Link
             href="/"
             aria-label={SITE.name}
-            className="flex items-center whitespace-nowrap text-[0.9375rem] font-bold uppercase tracking-[0.08em] text-white sm:text-lg"
+            className="flex items-center gap-2.5 whitespace-nowrap"
           >
-            Dynamic
-            <span className="mx-1.5 text-mustard">&middot;</span>
-            Enterprises
+            <Image
+              src="/images/logo-mark.png"
+              alt=""
+              aria-hidden
+              width={200}
+              height={200}
+              priority
+              className="h-8 w-8 sm:h-9 sm:w-9"
+            />
+            <span className="text-[0.9375rem] font-bold uppercase tracking-[0.08em] text-white sm:text-lg">
+              Dynamic
+              <span className="mx-1.5 text-mustard">&middot;</span>
+              Enterprises
+            </span>
           </Link>
 
           <ul className="hidden items-center gap-10 md:flex">
