@@ -5,6 +5,7 @@ import './globals.css';
 import { SITE } from '@/lib/site';
 import { Nav } from '@/components/layout/Nav';
 import { Footer } from '@/components/layout/Footer';
+import { ServiceSwitcher } from '@/components/services/ServiceSwitcher';
 import { SmoothScroll } from '@/components/motion/SmoothScroll';
 import { PageTransition } from '@/components/motion/PageTransition';
 import { LoadingScreen } from '@/components/motion/LoadingScreen';
@@ -100,6 +101,7 @@ export default function RootLayout({
 
         <SmoothScroll>
           <Nav />
+          <ServiceSwitcher />
           <PageTransition>
             <main id="main">{children}</main>
             <Footer />

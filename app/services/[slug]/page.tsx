@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ServiceSection } from '@/components/services/ServiceSection';
 import { ServiceVideoHero } from '@/components/services/ServiceVideoHero';
-import { ServiceSwitcher } from '@/components/services/ServiceSwitcher';
 import { InteriorCategoryGrid } from '@/components/services/InteriorCategoryGrid';
 import { InteriorGallery } from '@/components/services/InteriorGallery';
 import { CorporateFilmsGallery } from '@/components/services/CorporateFilmsGallery';
@@ -65,8 +64,6 @@ export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
           </div>
         </div>
       )}
-
-      <ServiceSwitcher />
 
       <ServiceSection service={service} index={0} />
 
