@@ -66,17 +66,33 @@ export function ServiceVideoHero({ title, tagline, videoSrc, posterSrc }: Servic
           />
         )
       ) : (
-        <video
-          className="absolute inset-0 h-full w-full object-contain"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          poster={posterSrc}
-        >
-          <source src={videoSrc} type="video/mp4" />
-        </video>
+        <>
+          {posterSrc && (
+            <Image
+              src={posterSrc}
+              alt=""
+              aria-hidden
+              fill
+              priority
+              sizes="100vw"
+              className="scale-110 object-cover blur-2xl brightness-75"
+            />
+          )}
+          <video
+            className="absolute inset-0 h-full w-full object-contain"
+            autoPlay
+            muted
+            loop
+            playsInline
+            controls={false}
+            disablePictureInPicture
+            disableRemotePlayback
+            preload="auto"
+            poster={posterSrc}
+          >
+            <source src={videoSrc} type="video/mp4" />
+          </video>
+        </>
       )}
 
       <div
