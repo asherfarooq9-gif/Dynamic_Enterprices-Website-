@@ -62,17 +62,17 @@ export function ServiceVideoHero({ title, tagline, videoSrc, posterSrc }: Servic
             fill
             priority
             sizes="100vw"
-            className="object-cover"
+            className="object-contain"
           />
         )
       ) : (
         <video
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-contain"
           autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
           poster={posterSrc}
         >
           <source src={videoSrc} type="video/mp4" />
