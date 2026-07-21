@@ -11,10 +11,10 @@ const config: Config = {
     // default type scale are the two biggest "template" tells.
     boxShadow: {
       none: 'none',
-      soft: '0 2px 8px rgba(26,35,50,0.04), 0 8px 24px rgba(26,35,50,0.05)',
-      large: '0 12px 32px rgba(26,35,50,0.07), 0 32px 64px rgba(26,35,50,0.08)',
+      soft: '0 2px 8px rgba(0,67,70,0.04), 0 8px 24px rgba(0,67,70,0.05)',
+      large: '0 12px 32px rgba(0,67,70,0.07), 0 32px 64px rgba(0,67,70,0.08)',
       premium:
-        '0 24px 60px rgba(26,35,50,0.10), 0 60px 120px rgba(26,35,50,0.12)',
+        '0 24px 60px rgba(0,67,70,0.10), 0 60px 120px rgba(0,67,70,0.12)',
       'soft-dark': '0 12px 30px rgba(0,0,0,0.35)',
       'large-dark': '0 30px 80px rgba(0,0,0,0.5)',
       'premium-dark': '0 40px 100px rgba(0,0,0,0.65)',
@@ -22,11 +22,11 @@ const config: Config = {
     extend: {
       colors: {
         navy: {
-          DEFAULT: '#1a2332',
-          light: '#2d3d55',
-          deep: '#0f1620',
-          deeper: '#0a0f18',
-          black: '#060a12',
+          DEFAULT: '#004346',
+          light: '#0C5C57',
+          deep: '#00302E',
+          deeper: '#001F1D',
+          black: '#000C0B',
         },
         mustard: {
           DEFAULT: '#d4b74a',
@@ -90,9 +90,9 @@ const config: Config = {
       },
       backgroundImage: {
         'hero-radial':
-          'radial-gradient(ellipse at 30% 40%, #243349 0%, #1a2332 40%, #0a0f18 100%)',
+          'radial-gradient(ellipse at 30% 40%, #14615B 0%, #004346 40%, #001F1D 100%)',
         'method-radial':
-          'radial-gradient(ellipse at 70% 50%, #2d3d55 0%, #1a2332 30%, #0f1620 70%, #060a12 100%)',
+          'radial-gradient(ellipse at 70% 50%, #0C5C57 0%, #004346 30%, #00302E 70%, #000C0B 100%)',
         'marble-light':
           'linear-gradient(135deg, #ffffff 0%, #f4f6f9 50%, #eceff4 100%)',
         'paper-fade': 'linear-gradient(180deg, #ffffff 0%, #f5f0e6 100%)',

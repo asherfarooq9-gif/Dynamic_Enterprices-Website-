@@ -81,7 +81,7 @@ export function ServiceVideoHero({ title, tagline, videoSrc, posterSrc }: Servic
 
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(10,15,24,0.55)_0%,rgba(10,15,24,0.35)_45%,rgba(6,10,18,0.85)_100%)]"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,31,29,0.55)_0%,rgba(0,31,29,0.35)_45%,rgba(0,12,11,0.85)_100%)]"
       />
 
       <nav

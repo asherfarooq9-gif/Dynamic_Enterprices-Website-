@@ -17,7 +17,7 @@ export function Footer() {
       {/* Gradient washes so the flat navy never reads as a solid block. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(45,61,85,0.9),transparent_60%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(12,92,87,0.9),transparent_60%)]"
       />
       <div
         aria-hidden

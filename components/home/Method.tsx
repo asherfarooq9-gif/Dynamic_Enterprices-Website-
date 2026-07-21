@@ -33,14 +33,14 @@ export function Method() {
               top: `${top}%`,
               opacity: [0.7, 0.42, 0.56, 0.39, 0.28][i],
               background:
-                'linear-gradient(90deg, transparent, rgba(70,95,135,0.14), rgba(45,61,85,0.25), rgba(70,95,135,0.14), transparent)',
+                'linear-gradient(90deg, transparent, rgba(19,143,138,0.14), rgba(12,92,87,0.25), rgba(19,143,138,0.14), transparent)',
             }}
           />
         ))}
       </div>
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(6,10,18,0.55)_100%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,12,11,0.55)_100%)]"
       />
 
       <div className="shell relative">

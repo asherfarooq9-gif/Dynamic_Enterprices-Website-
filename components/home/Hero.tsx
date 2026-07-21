@@ -43,11 +43,11 @@ export function Hero() {
           the brand's dark register while the room's light still reads. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(10,15,24,0.72)_0%,rgba(10,15,24,0.55)_45%,rgba(6,10,18,0.82)_100%)]"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,31,29,0.72)_0%,rgba(0,31,29,0.55)_45%,rgba(0,12,11,0.82)_100%)]"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,transparent_35%,rgba(6,10,18,0.6)_100%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,transparent_35%,rgba(0,12,11,0.6)_100%)]"
       />
       <div
         aria-hidden

@@ -24,14 +24,14 @@ export function FinalCta() {
       >
         <defs>
           <linearGradient id="cta-vein-a" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor="#1a2332" stopOpacity="0" />
-            <stop offset="0.5" stopColor="#1a2332" stopOpacity="0.22" />
-            <stop offset="1" stopColor="#1a2332" stopOpacity="0" />
+            <stop offset="0" stopColor="#004346" stopOpacity="0" />
+            <stop offset="0.5" stopColor="#004346" stopOpacity="0.22" />
+            <stop offset="1" stopColor="#004346" stopOpacity="0" />
           </linearGradient>
           <linearGradient id="cta-vein-b" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor="#2d3d55" stopOpacity="0" />
-            <stop offset="0.5" stopColor="#2d3d55" stopOpacity="0.16" />
-            <stop offset="1" stopColor="#2d3d55" stopOpacity="0" />
+            <stop offset="0" stopColor="#0C5C57" stopOpacity="0" />
+            <stop offset="0.5" stopColor="#0C5C57" stopOpacity="0.16" />
+            <stop offset="1" stopColor="#0C5C57" stopOpacity="0" />
           </linearGradient>
         </defs>
         <path

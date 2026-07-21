@@ -40,7 +40,7 @@ export function VideoSlot({ src, poster, title, className }: VideoSlotProps) {
           style={{
             backgroundImage: poster
               ? `url(${poster})`
-              : 'linear-gradient(180deg, #1a3a5c 0%, #0f2438 60%, #05141f 100%)',
+              : 'linear-gradient(180deg, #0B4F4C 0%, #052E2B 60%, #001210 100%)',
           }}
         >
           <span

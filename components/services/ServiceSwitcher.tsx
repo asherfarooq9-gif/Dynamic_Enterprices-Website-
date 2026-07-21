@@ -40,7 +40,7 @@ export function ServiceSwitcher() {
   return (
     <nav
       aria-label="Switch service"
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-navy/10 bg-white pb-[env(safe-area-inset-bottom)] shadow-[0_-4px_24px_rgba(10,15,24,0.08)]"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-navy/10 bg-white pb-[env(safe-area-inset-bottom)] shadow-[0_-4px_24px_rgba(0,31,29,0.08)]"
     >
       <ul className="grid grid-cols-4">
         {SERVICES.map((service) => {

@@ -163,7 +163,7 @@ export function ServicesCards() {
             <path
               d="M 60 0 L 0 0 0 60"
               fill="none"
-              stroke="#1a2332"
+              stroke="#004346"
               strokeWidth="0.4"
               opacity="0.06"
             />

@@ -39,11 +39,11 @@ export type PlaceholderKey =
  * the real photography will step into.
  */
 const PLACEHOLDER: Record<PlaceholderKey, string> = {
-  slate: 'linear-gradient(135deg, #4a5570 0%, #1a2332 60%, #0f1620 100%)',
-  brass: 'linear-gradient(135deg, #3d3320 0%, #6b5628 40%, #1a2332 100%)',
-  ink: 'linear-gradient(180deg, #1a3a5c 0%, #0f2438 60%, #05141f 100%)',
+  slate: 'linear-gradient(135deg, #2E6B63 0%, #004346 60%, #00302E 100%)',
+  brass: 'linear-gradient(135deg, #3d3320 0%, #6b5628 40%, #004346 100%)',
+  ink: 'linear-gradient(180deg, #0B4F4C 0%, #052E2B 60%, #001210 100%)',
   amber: 'linear-gradient(135deg, #5c4820 0%, #2d2312 100%)',
-  dusk: 'linear-gradient(135deg, #2d3d55 0%, #1a2332 60%, #0f1620 100%)',
+  dusk: 'linear-gradient(135deg, #0C5C57 0%, #004346 60%, #00302E 100%)',
   gilt: 'linear-gradient(135deg, #6b5628 0%, #2d2515 100%)',
 };
 

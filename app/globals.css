@@ -4,11 +4,11 @@
 
 @layer base {
   :root {
-    --color-navy: #1a2332;
-    --color-navy-light: #2d3d55;
-    --color-navy-deep: #0f1620;
-    --color-navy-deeper: #0a0f18;
-    --color-navy-black: #060a12;
+    --color-navy: #004346;
+    --color-navy-light: #0C5C57;
+    --color-navy-deep: #00302E;
+    --color-navy-deeper: #001F1D;
+    --color-navy-black: #000C0B;
     --color-mustard: #d4b74a;
     --color-mustard-dark: #a68b30;
     --color-cream: #f5f0e6;
@@ -96,10 +96,10 @@
   .text-gradient-navy {
     background: linear-gradient(
       135deg,
-      #2d3d55 0%,
-      #1a2332 45%,
-      #3d5273 75%,
-      #1a2332 100%
+      #0C5C57 0%,
+      #004346 45%,
+      #1F6F68 75%,
+      #004346 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
