@@ -31,15 +31,15 @@ export function Footer() {
           </p>
         </Reveal>
 
-        <div className="mt-16 grid gap-16 lg:grid-cols-[1.4fr_1fr_1fr]">
+        <div className="mt-12 grid gap-12 text-center lg:mt-16 lg:grid-cols-[1.4fr_1fr_1fr] lg:gap-16 lg:text-left">
           <Reveal delay={0.05}>
-            <p className="max-w-prose text-body text-cream/60">
+            <p className="mx-auto max-w-prose text-body text-cream/60 lg:mx-0">
               {DISCIPLINES.join(' · ')} — one studio, full accountability.
             </p>
 
             {/* REPLACE: newsletter posts nowhere until an endpoint exists. */}
             <form
-              className="mt-10 flex max-w-md items-center gap-4 border-b border-cream/20 pb-3 focus-within:border-mustard"
+              className="mx-auto mt-10 flex max-w-md items-center gap-4 border-b border-cream/20 pb-3 focus-within:border-mustard lg:mx-0"
               onSubmit={(event) => event.preventDefault()}
             >
               <label htmlFor="newsletter" className="sr-only">
@@ -106,7 +106,7 @@ export function Footer() {
               </p>
             </address>
 
-            <div className="mt-8 flex gap-4">
+            <div className="mt-8 flex justify-center gap-4 lg:justify-start">
               <a
                 href={SITE.social.instagram}
                 aria-label="Instagram"
@@ -129,7 +129,7 @@ export function Footer() {
           </Reveal>
         </div>
 
-        <div className="flex flex-col gap-4 border-t border-cream/10 py-8 text-[0.625rem] uppercase tracking-[0.22em] text-cream/40 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col items-center gap-3 border-t border-cream/10 py-8 text-center text-[0.625rem] uppercase tracking-[0.22em] text-cream/40 sm:flex-row sm:items-center sm:justify-between sm:text-left">
           <span>
             {SITE.city} · {SITE.country}
           </span>
