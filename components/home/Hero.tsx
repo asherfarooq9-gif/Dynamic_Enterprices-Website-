@@ -7,7 +7,6 @@ import { HeroParticles } from './HeroParticles';
 import { HeroSlideshow } from './HeroSlideshow';
 import { EASE } from '@/lib/motion';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
-import { useIsMobileViewport } from '@/hooks/useIsMobileViewport';
 import { SITE, DISCIPLINES } from '@/lib/site';
 
 /**
@@ -20,7 +19,6 @@ import { SITE, DISCIPLINES } from '@/lib/site';
  */
 export function Hero() {
   const prefersReduced = useReducedMotion();
-  const isMobile = useIsMobileViewport();
   const [isSettled, setIsSettled] = useState(false);
 
   return (
@@ -66,7 +64,7 @@ export function Hero() {
             sees, this is what a screen reader or crawler sees. Under reduced
             motion the canvas renders nothing at all, so this becomes the
             visible wordmark instead: real, solid, static, no animation. */}
-        <h1 className={prefersReduced || isMobile ? 'text-white' : 'opacity-0'}>
+        <h1 className={prefersReduced ? 'text-white' : 'opacity-0'}>
           <span className="block text-[clamp(2.75rem,1rem+7.5vw,6.875rem)] font-bold leading-[0.9] tracking-[-0.04em]">
             DYNAMIC
           </span>

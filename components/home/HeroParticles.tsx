@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from 'react';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
-import { useIsMobileViewport } from '@/hooks/useIsMobileViewport';
 
 const MAX_DPR = 2;
 /** Dense enough that settled grains tile into a solid glyph, not a texture. */
@@ -73,12 +72,11 @@ interface HeroParticlesProps {
 export function HeroParticles({ onSettled }: HeroParticlesProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const prefersReduced = useReducedMotion();
-  const isMobile = useIsMobileViewport();
   const onSettledRef = useRef(onSettled);
   onSettledRef.current = onSettled;
 
   useEffect(() => {
-    if (prefersReduced || isMobile) {
+    if (prefersReduced) {
       onSettledRef.current();
       return;
     }
@@ -120,13 +118,18 @@ export function HeroParticles({ onSettled }: HeroParticlesProps) {
       const data = octx.getImageData(0, 0, width, height).data;
       particles = [];
       maxDelay = 0;
-      // Slightly larger than the sample grid so adjacent grains overlap and
-      // tile into solid coverage once every particle has arrived.
-      const grainSize = SAMPLE_STEP * 1.15;
+      // Comfortably larger than the sample grid so adjacent grains always
+      // overlap and tile into solid coverage once every particle has arrived
+      // — no gaps between grains showing background through.
+      const grainSize = SAMPLE_STEP * 1.4;
 
       for (let y = 0; y < height; y += SAMPLE_STEP) {
         for (let x = 0; x < width; x += SAMPLE_STEP) {
-          if (data[(y * width + x) * 4 + 3] <= 128) continue;
+          // Only skip genuinely-transparent pixels — excluding antialiased
+          // edge pixels here means letterform edges never get a grain and
+          // only appear later when the crisp glyph cross-fades in, reading
+          // as inconsistent "pop-in" right at the resolve.
+          if (data[(y * width + x) * 4 + 3] <= 10) continue;
 
           // Each grain starts scattered near its own letter, not raining
           // down from above — it converges inward to form the glyph.
@@ -147,7 +150,7 @@ export function HeroParticles({ onSettled }: HeroParticlesProps) {
             sy,
             x: sx,
             y: sy,
-            size: grainSize * (0.75 + Math.random() * 0.4),
+            size: grainSize * (0.9 + Math.random() * 0.15),
             delay,
             alpha: 0,
             color: GRAIN_COLORS[Math.floor(Math.random() * GRAIN_COLORS.length)],
@@ -239,9 +242,9 @@ export function HeroParticles({ onSettled }: HeroParticlesProps) {
       if (frame) cancelAnimationFrame(frame);
       window.removeEventListener('resize', onResize);
     };
-  }, [prefersReduced, isMobile]);
+  }, [prefersReduced]);
 
-  if (prefersReduced || isMobile) return null;
+  if (prefersReduced) return null;
 
   return (
     <canvas

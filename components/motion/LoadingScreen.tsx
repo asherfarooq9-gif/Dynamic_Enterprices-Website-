@@ -6,13 +6,12 @@ import { EASE } from '@/lib/motion';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { SITE } from '@/lib/site';
 
-const MIN_VISIBLE_MS = 900;
-
 /**
- * Navy-deep hold on first paint: the monogram appears, a mustard hairline
+ * Navy-deep flash on first paint: the monogram appears, a mustard hairline
  * fills, then the whole plate lifts away to reveal the hero already running.
- * It waits for fonts, so the hero's particle text is sampled from real Roboto
- * rather than from a fallback face.
+ * Dismisses on next paint — no artificial hold. `HeroParticles` waits for
+ * `document.fonts.ready` itself before sampling the wordmark font, so this
+ * component doesn't need to gate on fonts too.
  */
 export function LoadingScreen() {
   const [isDone, setIsDone] = useState(false);
@@ -24,19 +23,8 @@ export function LoadingScreen() {
       return;
     }
 
-    const shownAt = performance.now();
-    const fontsReady = document.fonts?.ready ?? Promise.resolve();
-    let timer: ReturnType<typeof setTimeout>;
-
-    void fontsReady.then(() => {
-      const elapsed = performance.now() - shownAt;
-      timer = setTimeout(
-        () => setIsDone(true),
-        Math.max(0, MIN_VISIBLE_MS - elapsed),
-      );
-    });
-
-    return () => clearTimeout(timer);
+    const frame = requestAnimationFrame(() => setIsDone(true));
+    return () => cancelAnimationFrame(frame);
   }, [prefersReduced]);
 
   if (prefersReduced) return null;
