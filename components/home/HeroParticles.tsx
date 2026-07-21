@@ -120,8 +120,10 @@ export function HeroParticles({ onSettled }: HeroParticlesProps) {
       maxDelay = 0;
       // Comfortably larger than the sample grid so adjacent grains always
       // overlap and tile into solid coverage once every particle has arrived
-      // — no gaps between grains showing background through.
-      const grainSize = SAMPLE_STEP * 1.4;
+      // — no gaps between grains showing background through. Circles cover
+      // less of their bounding box than squares, so this runs larger than
+      // the square-grain version did.
+      const grainSize = SAMPLE_STEP * 1.7;
 
       for (let y = 0; y < height; y += SAMPLE_STEP) {
         for (let x = 0; x < width; x += SAMPLE_STEP) {
@@ -150,7 +152,7 @@ export function HeroParticles({ onSettled }: HeroParticlesProps) {
             sy,
             x: sx,
             y: sy,
-            size: grainSize * (0.9 + Math.random() * 0.15),
+            size: grainSize * (0.95 + Math.random() * 0.2),
             delay,
             alpha: 0,
             color: GRAIN_COLORS[Math.floor(Math.random() * GRAIN_COLORS.length)],
@@ -184,10 +186,13 @@ export function HeroParticles({ onSettled }: HeroParticlesProps) {
         if (p.alpha <= 0.01) continue;
 
         // The grain fades out as the resolve fades the real glyph in —
-        // one continuous cross-blend, not a pop.
+        // one continuous cross-blend, not a pop. Round dots read as soft
+        // particles/dust rather than hard square pixels.
         ctx.globalAlpha = p.alpha * (1 - resolveT);
         ctx.fillStyle = p.color;
-        ctx.fillRect(p.x, p.y, p.size, p.size);
+        ctx.beginPath();
+        ctx.arc(p.x + p.size / 2, p.y + p.size / 2, p.size / 2, 0, Math.PI * 2);
+        ctx.fill();
       }
 
       if (resolveT > 0) {
