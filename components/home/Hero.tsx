@@ -43,11 +43,11 @@ export function Hero() {
           the brand's dark register while the room's light still reads. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,31,29,0.72)_0%,rgba(0,31,29,0.55)_45%,rgba(0,12,11,0.82)_100%)]"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,31,29,0.58)_0%,rgba(0,31,29,0.42)_45%,rgba(0,12,11,0.68)_100%)]"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,transparent_35%,rgba(0,12,11,0.6)_100%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,transparent_35%,rgba(0,12,11,0.48)_100%)]"
       />
       <div
         aria-hidden
@@ -90,7 +90,7 @@ export function Hero() {
       {/* Vignette. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 shadow-[inset_0_0_140px_rgba(0,0,0,0.7)]"
+        className="pointer-events-none absolute inset-0 shadow-[inset_0_0_140px_rgba(0,0,0,0.55)]"
       />
 
       <div className="shell pointer-events-none relative flex h-full flex-col justify-end pb-10">
