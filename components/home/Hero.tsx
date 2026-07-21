@@ -27,7 +27,7 @@ export function Hero() {
           an autoplaying video is itself the thing reduced-motion opts out of. */}
       {prefersReduced ? (
         <Image
-          src="/images/hero.jpg"
+          src="/images/hero-slideshow/1.jpg"
           alt=""
           aria-hidden
           fill
