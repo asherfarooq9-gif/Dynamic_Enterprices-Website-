@@ -21,6 +21,10 @@ export interface Service {
   /** REPLACE: drop the file at this path — services without one get the
    * standard breadcrumb header instead of a video hero. */
   heroVideo?: string;
+  /** Poster shown while `heroVideo` buffers — should be the video's own
+   * first frame so the swap to playback is invisible. Falls back to
+   * `image` when omitted. */
+  heroVideoPoster?: string;
 }
 
 /** REPLACE: service copy is professional placeholder — confirm with client. */
@@ -45,6 +49,7 @@ export const SERVICES: readonly Service[] = [
     image: '/images/services/interior-gallery/1.jpg',
     meta: { left: 'Karachi', right: '2024' },
     heroVideo: '/videos/interior-hero.mp4',
+    heroVideoPoster: '/images/services/interior-hero/poster.jpg',
   },
   {
     id: 'supplies',
