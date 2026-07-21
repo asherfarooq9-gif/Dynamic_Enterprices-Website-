@@ -55,39 +55,23 @@ export function ServiceSwitcher() {
                 aria-current={isActive ? 'page' : undefined}
                 aria-label={service.title}
                 className={cn(
-                  'flex flex-col items-center justify-center gap-1 px-2 py-3 text-[0.6875rem] font-bold uppercase tracking-[0.22em] transition-colors duration-normal sm:flex-row sm:gap-2.5 sm:px-6 sm:py-5',
-                  isActive
-                    ? 'bg-navy/[0.04] text-navy'
-                    : 'text-navy/45 hover:text-mustard-dark',
+                  'flex flex-col items-center justify-center gap-1 px-2 py-3 text-[0.6875rem] font-bold uppercase tracking-[0.22em] text-navy transition-colors duration-normal sm:flex-row sm:gap-2.5 sm:px-6 sm:py-5',
+                  isActive && 'bg-navy/[0.04]',
                 )}
               >
                 {Icon && (
-                  <Icon
-                    aria-hidden
-                    className={cn(
-                      'text-lg sm:hidden',
-                      isActive ? 'text-mustard-dark' : 'text-navy/40',
-                    )}
-                  />
+                  <Icon aria-hidden className="text-lg text-navy sm:hidden" />
                 )}
                 <span
                   aria-hidden
-                  className={cn(
-                    'text-[0.5rem] font-normal normal-case tracking-normal sm:hidden',
-                    isActive ? 'text-mustard-dark' : 'text-navy/40',
-                  )}
+                  className="text-[0.5rem] font-normal normal-case tracking-normal text-navy sm:hidden"
                 >
                   {SHORT_LABEL[service.id]}
                 </span>
-                <span
-                  className={cn(
-                    'hidden text-[0.625rem] font-normal tracking-normal sm:inline',
-                    isActive ? 'text-mustard-dark' : 'text-navy/25',
-                  )}
-                >
+                <span className="hidden text-[0.625rem] font-normal tracking-normal text-navy sm:inline">
                   {service.index}
                 </span>
-                <span className="hidden whitespace-nowrap sm:inline">
+                <span className="hidden whitespace-nowrap text-navy sm:inline">
                   {service.title}
                 </span>
               </Link>
