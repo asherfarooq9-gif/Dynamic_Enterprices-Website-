@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useIsMobileViewport } from '@/hooks/useIsMobileViewport';
-import { cn } from '@/lib/cn';
 
 const SLIDES = [
   '/images/hero-slideshow/1.jpg',
@@ -48,10 +47,7 @@ export function HeroSlideshow() {
   }, [isVisible]);
 
   return (
-    <div
-      ref={containerRef}
-      className={cn('absolute inset-0 overflow-hidden', isMobile && 'bg-mustard')}
-    >
+    <div ref={containerRef} className="absolute inset-0 overflow-hidden">
       <AnimatePresence>
         <motion.div
           key={index}
@@ -64,6 +60,17 @@ export function HeroSlideshow() {
             scale: { duration: SLIDE_DURATION / 1000 + 1.2, ease: 'linear' },
           }}
         >
+          {isMobile && (
+            <Image
+              src={SLIDES[index]}
+              alt=""
+              aria-hidden
+              fill
+              priority={index === 0}
+              sizes="100vw"
+              className="scale-110 object-cover blur-2xl brightness-75"
+            />
+          )}
           <Image
             src={SLIDES[index]}
             alt=""
