@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
+import { useIsMobileViewport } from '@/hooks/useIsMobileViewport';
 
 const MAX_DPR = 2;
 /** Dense enough that settled grains tile into a solid glyph, not a texture. */
@@ -72,11 +73,12 @@ interface HeroParticlesProps {
 export function HeroParticles({ onSettled }: HeroParticlesProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const prefersReduced = useReducedMotion();
+  const isMobile = useIsMobileViewport();
   const onSettledRef = useRef(onSettled);
   onSettledRef.current = onSettled;
 
   useEffect(() => {
-    if (prefersReduced) {
+    if (prefersReduced || isMobile) {
       onSettledRef.current();
       return;
     }
@@ -237,9 +239,9 @@ export function HeroParticles({ onSettled }: HeroParticlesProps) {
       if (frame) cancelAnimationFrame(frame);
       window.removeEventListener('resize', onResize);
     };
-  }, [prefersReduced]);
+  }, [prefersReduced, isMobile]);
 
-  if (prefersReduced) return null;
+  if (prefersReduced || isMobile) return null;
 
   return (
     <canvas

@@ -16,6 +16,15 @@ const SERVICE_ICONS: Record<string, IconType> = {
   'scrub-uniforms': FaTshirt,
 };
 
+/** Short mobile-only cue under each icon — four unlabeled icons aren't
+ * self-explanatory to a first-time visitor. */
+const SHORT_LABEL: Record<string, string> = {
+  interior: 'Interior',
+  supplies: 'Supplies',
+  'corporate-films': 'Films',
+  'scrub-uniforms': 'Uniforms',
+};
+
 /**
  * Pinned to the bottom of the viewport on every page so a visitor can jump
  * discipline-to-discipline from anywhere. Four equal cells, always. Below
@@ -31,7 +40,7 @@ export function ServiceSwitcher() {
   return (
     <nav
       aria-label="Switch service"
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-navy/10 bg-white shadow-[0_-4px_24px_rgba(10,15,24,0.08)]"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-navy/10 bg-white pb-[env(safe-area-inset-bottom)] shadow-[0_-4px_24px_rgba(10,15,24,0.08)]"
     >
       <ul className="grid grid-cols-4">
         {SERVICES.map((service) => {
@@ -61,6 +70,15 @@ export function ServiceSwitcher() {
                     )}
                   />
                 )}
+                <span
+                  aria-hidden
+                  className={cn(
+                    'text-[0.5rem] font-normal normal-case tracking-normal sm:hidden',
+                    isActive ? 'text-mustard-dark' : 'text-navy/40',
+                  )}
+                >
+                  {SHORT_LABEL[service.id]}
+                </span>
                 <span
                   className={cn(
                     'hidden text-[0.625rem] font-normal tracking-normal sm:inline',

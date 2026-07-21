@@ -55,7 +55,7 @@ export function Footer() {
               <button
                 type="submit"
                 aria-label="Subscribe"
-                className="shrink-0 text-mustard transition-transform duration-normal ease-expo hover:translate-x-1"
+                className="flex h-11 w-11 shrink-0 items-center justify-center text-mustard transition-transform duration-normal ease-expo hover:translate-x-1"
               >
                 <FiArrowUpRight size={20} />
               </button>
@@ -112,7 +112,7 @@ export function Footer() {
                 aria-label="Instagram"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-full ring-1 ring-cream/15 transition-colors duration-normal hover:bg-mustard hover:text-navy hover:ring-mustard"
+                className="flex h-11 w-11 items-center justify-center rounded-full ring-1 ring-cream/15 transition-colors duration-normal hover:bg-mustard hover:text-navy hover:ring-mustard"
               >
                 <FiInstagram size={16} />
               </a>
@@ -121,7 +121,7 @@ export function Footer() {
                 aria-label="LinkedIn"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-full ring-1 ring-cream/15 transition-colors duration-normal hover:bg-mustard hover:text-navy hover:ring-mustard"
+                className="flex h-11 w-11 items-center justify-center rounded-full ring-1 ring-cream/15 transition-colors duration-normal hover:bg-mustard hover:text-navy hover:ring-mustard"
               >
                 <FiLinkedin size={16} />
               </a>

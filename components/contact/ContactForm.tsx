@@ -75,12 +75,13 @@ export function ContactForm() {
           transition={{ duration: 0.4 }}
           onSubmit={handleSubmit(onSubmit)}
           noValidate
-          className="space-y-8"
+          className="space-y-6 sm:space-y-8"
         >
           <div className="relative">
             <input
               id="name"
               type="text"
+              autoComplete="name"
               placeholder=" "
               className={FIELD_CLASS}
               {...register('name')}
@@ -97,6 +98,7 @@ export function ContactForm() {
             <input
               id="email"
               type="email"
+              autoComplete="email"
               placeholder=" "
               className={FIELD_CLASS}
               {...register('email')}
@@ -113,6 +115,8 @@ export function ContactForm() {
             <input
               id="phone"
               type="tel"
+              autoComplete="tel"
+              inputMode="tel"
               placeholder=" "
               className={FIELD_CLASS}
               {...register('phone')}

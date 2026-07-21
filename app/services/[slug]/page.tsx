@@ -84,6 +84,7 @@ export default function ServiceDetailPage({ params }: ServiceDetailPageProps) {
           title={service.title}
           tagline={service.short}
           videoSrc={service.heroVideo}
+          posterSrc={service.image}
         />
       ) : (
         <div className="border-b border-navy/10 bg-white pt-28">

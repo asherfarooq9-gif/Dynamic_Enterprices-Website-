@@ -1,14 +1,41 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { EASE } from '@/lib/motion';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
+import { useIsMobileViewport } from '@/hooks/useIsMobileViewport';
 
 interface ServiceVideoHeroProps {
   title: string;
   tagline: string;
   videoSrc: string;
+  /** Still frame shown before the video downloads, and in place of the video
+   * entirely under reduced-motion or a detected slow mobile connection. */
+  posterSrc?: string;
+}
+
+/** navigator.connection is Chromium-only (zero Safari support) — read it
+ * defensively and fail open (keep autoplay) whenever it's absent. */
+function useIsSlowConnection(): boolean {
+  const [isSlow, setIsSlow] = useState(false);
+
+  useEffect(() => {
+    const connection = (
+      navigator as Navigator & {
+        connection?: { saveData?: boolean; effectiveType?: string };
+      }
+    ).connection;
+    if (!connection) return;
+    setIsSlow(
+      Boolean(connection.saveData) ||
+        ['slow-2g', '2g'].includes(connection.effectiveType ?? ''),
+    );
+  }, []);
+
+  return isSlow;
 }
 
 /**
@@ -18,12 +45,27 @@ interface ServiceVideoHeroProps {
  * loses its footing landing here directly. Under reduced motion the video
  * never mounts at all — the navy bed plus title is the whole hero.
  */
-export function ServiceVideoHero({ title, tagline, videoSrc }: ServiceVideoHeroProps) {
+export function ServiceVideoHero({ title, tagline, videoSrc, posterSrc }: ServiceVideoHeroProps) {
   const prefersReduced = useReducedMotion();
+  const isMobile = useIsMobileViewport();
+  const isSlowConnection = useIsSlowConnection();
+  const skipVideo = prefersReduced || (isMobile && isSlowConnection);
 
   return (
     <section className="relative h-svh min-h-[36rem] w-full overflow-hidden bg-hero-radial">
-      {!prefersReduced && (
+      {skipVideo ? (
+        posterSrc && (
+          <Image
+            src={posterSrc}
+            alt=""
+            aria-hidden
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        )
+      ) : (
         <video
           className="absolute inset-0 h-full w-full object-cover"
           autoPlay
@@ -31,6 +73,7 @@ export function ServiceVideoHero({ title, tagline, videoSrc }: ServiceVideoHeroP
           loop
           playsInline
           preload="metadata"
+          poster={posterSrc}
         >
           <source src={videoSrc} type="video/mp4" />
         </video>

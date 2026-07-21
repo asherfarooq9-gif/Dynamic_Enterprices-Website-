@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Roboto, Homemade_Apple } from 'next/font/google';
 import './globals.css';
 
@@ -57,6 +57,12 @@ export const metadata: Metadata = {
   },
   alternates: { canonical: '/' },
   robots: { index: true, follow: true },
+};
+
+export const viewport: Viewport = {
+  themeColor: '#1a2332',
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -143,7 +149,10 @@ export default function RootLayout({
           </PageTransition>
           {/* Spacer so the fixed bottom ServiceSwitcher never overlaps the
               footer's own content/links. */}
-          <div aria-hidden className="h-[3.75rem] sm:h-[4.25rem]" />
+          <div
+            aria-hidden
+            className="h-[calc(3.75rem+env(safe-area-inset-bottom))] sm:h-[4.25rem]"
+          />
           <ServiceSwitcher />
         </SmoothScroll>
       </body>

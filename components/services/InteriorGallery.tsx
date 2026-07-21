@@ -1,6 +1,9 @@
+'use client';
+
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { PhotoSlot } from '@/components/ui/PhotoSlot';
 import { Reveal } from '@/components/motion/Reveal';
+import { useIsMobileViewport } from '@/hooks/useIsMobileViewport';
 
 const GALLERY_IMAGES = [
   {
@@ -35,10 +38,19 @@ const GALLERY_IMAGES = [
  * on the site, just fed real `src` values instead of gradient placeholders.
  */
 export function InteriorGallery() {
+  const isMobile = useIsMobileViewport();
+
   return (
     <section aria-label="Interior gallery" className="section-y bg-cream">
       <div className="shell">
-        <SectionHeading eyebrow="The work" title={'FROM OUR\nINTERIOR PROJECTS'} />
+        <SectionHeading
+          eyebrow="The work"
+          title={
+            isMobile
+              ? 'FROM OUR\nINTERIOR\nPROJECTS'
+              : 'FROM OUR\nINTERIOR PROJECTS'
+          }
+        />
 
         <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {GALLERY_IMAGES.map((image, i) => (

@@ -1,9 +1,14 @@
+'use client';
+
 import { SplitText } from '@/components/motion/SplitText';
 import { Reveal } from '@/components/motion/Reveal';
+import { useIsMobileViewport } from '@/hooks/useIsMobileViewport';
 import { SITE } from '@/lib/site';
 
 /** The one dark act on Contact — same navy-deep register as every other hero. */
 export function ContactHero() {
+  const isMobile = useIsMobileViewport();
+
   return (
     <section className="relative flex min-h-[50vh] flex-col justify-center overflow-hidden bg-hero-radial px-6 py-32 text-center">
       <div
@@ -21,7 +26,11 @@ export function ContactHero() {
 
         <SplitText
           as="h1"
-          text={"LET'S CREATE\nSOMETHING TOGETHER"}
+          text={
+            isMobile
+              ? "LET'S CREATE\nSOMETHING\nTOGETHER"
+              : "LET'S CREATE\nSOMETHING TOGETHER"
+          }
           className="text-hero max-w-4xl text-white"
         />
 

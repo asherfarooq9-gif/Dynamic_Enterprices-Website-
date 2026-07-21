@@ -1,5 +1,8 @@
+'use client';
+
 import { SplitText } from '@/components/motion/SplitText';
 import { Reveal } from '@/components/motion/Reveal';
+import { useIsMobileViewport } from '@/hooks/useIsMobileViewport';
 import { SITE, DISCIPLINES } from '@/lib/site';
 
 /**
@@ -7,6 +10,8 @@ import { SITE, DISCIPLINES } from '@/lib/site';
  * so every top-level page shares one footing.
  */
 export function AboutHero() {
+  const isMobile = useIsMobileViewport();
+
   return (
     <section className="relative flex min-h-[60vh] flex-col justify-center overflow-hidden bg-hero-radial px-6 py-32 text-center">
       <div
@@ -24,7 +29,11 @@ export function AboutHero() {
 
         <SplitText
           as="h1"
-          text={'BUSINESS MUST BE\nDYNAMIC, NOT STATIC'}
+          text={
+            isMobile
+              ? 'BUSINESS MUST BE\nDYNAMIC,\nNOT STATIC'
+              : 'BUSINESS MUST BE\nDYNAMIC, NOT STATIC'
+          }
           className="text-hero max-w-4xl text-white"
         />
 

@@ -41,24 +41,28 @@ export default function ContactPage() {
               <p className="max-w-prose text-lead text-navy/80">{SITE.address}</p>
             </div>
 
-            <div className="relative aspect-video overflow-hidden rounded-lg ring-1 ring-navy/10">
-              <iframe
-                title={`Map: ${SITE.address}`}
-                src={`https://www.google.com/maps?q=${encodeURIComponent(SITE.address)}&output=embed`}
-                className="absolute inset-0 h-full w-full border-0"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+            <div className="overflow-hidden rounded-lg ring-1 ring-navy/10">
+              <div className="relative aspect-video">
+                <iframe
+                  title={`Map: ${SITE.address}`}
+                  src={`https://www.google.com/maps?q=${encodeURIComponent(SITE.address)}&output=embed`}
+                  className="absolute inset-0 h-full w-full border-0"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
 
-              <a
-                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(SITE.address)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Open ${SITE.address} in Google Maps`}
-                className="absolute bottom-4 right-4 rounded-full bg-navy/90 px-4 py-2 text-[0.625rem] font-bold uppercase tracking-[0.2em] text-white shadow-large backdrop-blur-sm transition-colors hover:bg-mustard hover:text-navy"
-              >
-                Open in Maps
-              </a>
+              <div className="flex justify-end bg-navy px-4 py-3">
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(SITE.address)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Open ${SITE.address} in Google Maps`}
+                  className="inline-flex min-h-[2.75rem] items-center rounded-full bg-white/10 px-5 text-[0.6875rem] font-bold uppercase tracking-[0.2em] text-white transition-colors hover:bg-mustard hover:text-navy"
+                >
+                  Open in Maps
+                </a>
+              </div>
             </div>
           </Reveal>
         </div>

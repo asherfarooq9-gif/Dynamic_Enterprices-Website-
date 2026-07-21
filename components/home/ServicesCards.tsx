@@ -30,22 +30,22 @@ const CARDS: readonly CardConfig[] = [
   {
     rest: -3,
     className: 'lg:mt-16 lg:w-[17.5rem]',
-    sizes: '(max-width: 1024px) 45vw, 18rem',
+    sizes: '(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 18rem',
   },
   {
     rest: 0,
     className: 'lg:-mt-4 lg:w-[22.5rem]',
-    sizes: '(max-width: 1024px) 45vw, 23rem',
+    sizes: '(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 23rem',
   },
   {
     rest: 3,
     className: 'lg:mt-20 lg:w-[16.25rem]',
-    sizes: '(max-width: 1024px) 45vw, 17rem',
+    sizes: '(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 17rem',
   },
   {
     rest: -2,
     className: 'lg:mt-40 lg:w-[12.5rem]',
-    sizes: '(max-width: 1024px) 45vw, 13rem',
+    sizes: '(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 13rem',
   },
 ] as const;
 
@@ -193,7 +193,7 @@ export function ServicesCards() {
           </p>
         </div>
 
-        <div className="mt-20 grid grid-cols-2 gap-6 lg:flex lg:items-start lg:justify-center lg:gap-10">
+        <div className="mt-20 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:flex lg:items-start lg:justify-center lg:gap-10">
           {SERVICES.map((service, i) => (
             <ServiceCard
               key={service.id}

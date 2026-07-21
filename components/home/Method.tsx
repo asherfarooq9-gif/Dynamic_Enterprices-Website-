@@ -1,5 +1,8 @@
+'use client';
+
 import { Reveal } from '@/components/motion/Reveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import { useIsMobileViewport } from '@/hooks/useIsMobileViewport';
 import { METHOD } from '@/content/method';
 
 /**
@@ -13,6 +16,8 @@ import { METHOD } from '@/content/method';
  * site — matching the rest of the page instead of a one-off GSAP scrub.
  */
 export function Method() {
+  const isMobile = useIsMobileViewport();
+
   return (
     <section
       aria-label="Our method"
@@ -42,7 +47,11 @@ export function Method() {
         <SectionHeading
           eyebrow="The method"
           tone="dark"
-          title={'WE HANDLE ALL\nTHE COMPLEXITY'}
+          title={
+            isMobile
+              ? 'WE HANDLE ALL\nTHE\nCOMPLEXITY'
+              : 'WE HANDLE ALL\nTHE COMPLEXITY'
+          }
         />
 
         <ol className="mt-24 lg:mt-32">

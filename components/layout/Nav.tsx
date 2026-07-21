@@ -107,7 +107,7 @@ export function Nav() {
               onClick={() => setIsMenuOpen((open) => !open)}
               aria-expanded={isMenuOpen}
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-              className="flex h-8 w-8 flex-col items-end justify-center gap-1.5 md:hidden"
+              className="flex h-11 w-11 flex-col items-end justify-center gap-1.5 md:hidden"
             >
               <span
                 className={cn(
