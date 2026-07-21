@@ -63,7 +63,7 @@ export function WorkMarquee() {
               return (
                 <li
                   key={`${project.id}-${i}`}
-                  className="w-[10.625rem] shrink-0"
+                  className="w-32 shrink-0 sm:w-[10.625rem]"
                   aria-hidden={isClone}
                 >
                   <Link
@@ -79,7 +79,7 @@ export function WorkMarquee() {
                         alt={project.name}
                         reveal={false}
                         zoom
-                        sizes="10.625rem"
+                        sizes="(max-width: 639px) 8rem, 10.625rem"
                       />
                     </div>
                   </Link>
