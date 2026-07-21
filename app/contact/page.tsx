@@ -30,7 +30,6 @@ export default function ContactPage() {
             <div>
               <p className="eyebrow mb-4 text-mustard-dark">Phone</p>
               <p className="text-lead text-navy/80">{SITE.phone}</p>
-              <p className="text-lead text-navy/80">+92 339 520 0009</p>
             </div>
             <div>
               <p className="eyebrow mb-4 text-mustard-dark">Email</p>

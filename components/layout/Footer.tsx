@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { FiArrowUpRight, FiInstagram, FiLinkedin } from 'react-icons/fi';
+import { FiArrowUpRight, FiInstagram } from 'react-icons/fi';
 import { NAV_LINKS, SITE, DISCIPLINES } from '@/lib/site';
 import { Reveal } from '@/components/motion/Reveal';
 
@@ -116,15 +116,6 @@ export function Footer() {
                 className="flex h-11 w-11 items-center justify-center rounded-full ring-1 ring-cream/15 transition-colors duration-normal hover:bg-mustard hover:text-navy hover:ring-mustard"
               >
                 <FiInstagram size={16} />
-              </a>
-              <a
-                href={SITE.social.linkedin}
-                aria-label="LinkedIn"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-11 w-11 items-center justify-center rounded-full ring-1 ring-cream/15 transition-colors duration-normal hover:bg-mustard hover:text-navy hover:ring-mustard"
-              >
-                <FiLinkedin size={16} />
               </a>
             </div>
           </Reveal>

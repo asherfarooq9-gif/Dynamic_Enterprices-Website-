@@ -11,11 +11,10 @@ export const SITE = {
   description:
     'A multi-service studio from Karachi delivering interior, supplies, corporate films and uniforms — dynamic services, well-planned strategies, and the discipline to meet deadlines and budgets every time.',
   email: 'dynamicenterprises1@outlook.com',
-  phone: '+92 334 319 1198',
+  phone: '+92 339 5200009',
   address: 'Office no. 3, Al-Noor Garden, Sharfabad, Karachi, Sindh, Pakistan',
   social: {
-    instagram: 'https://instagram.com/',
-    linkedin: 'https://linkedin.com/',
+    instagram: 'https://www.instagram.com/dynamicenterprises25?utm_source=qr',
   },
 } as const;
 
