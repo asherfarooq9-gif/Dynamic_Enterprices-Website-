@@ -26,20 +26,21 @@ export function Footer() {
 
       <div className="shell relative pb-20 pt-section">
         <Reveal className="text-center">
-          <p className="whitespace-nowrap text-[clamp(1.5rem,0.6rem+3vw,3.75rem)] font-bold uppercase leading-[0.95] tracking-[-0.035em] text-white">
-            Spaces designed. <span className="text-mustard">Stories delivered.</span>
+          <p className="text-[clamp(1.5rem,0.6rem+3vw,3.75rem)] font-bold uppercase leading-[0.95] tracking-[-0.035em] text-white lg:whitespace-nowrap">
+            <span className="block lg:inline">Spaces designed.</span>{' '}
+            <span className="block text-mustard lg:inline">Stories delivered.</span>
           </p>
         </Reveal>
 
-        <div className="mt-12 grid gap-12 text-center lg:mt-16 lg:grid-cols-[1.4fr_1fr_1fr] lg:gap-16 lg:text-left">
+        <div className="mt-12 grid gap-12 lg:mt-16 lg:grid-cols-[1.4fr_1fr_1fr] lg:gap-16">
           <Reveal delay={0.05}>
-            <p className="mx-auto max-w-prose text-body text-cream/60 lg:mx-0">
+            <p className="max-w-prose text-body text-cream/60">
               {DISCIPLINES.join(' · ')} — one studio, full accountability.
             </p>
 
             {/* REPLACE: newsletter posts nowhere until an endpoint exists. */}
             <form
-              className="mx-auto mt-10 flex max-w-md items-center gap-4 border-b border-cream/20 pb-3 focus-within:border-mustard lg:mx-0"
+              className="mt-10 flex max-w-md items-center gap-4 border-b border-cream/20 pb-3 focus-within:border-mustard"
               onSubmit={(event) => event.preventDefault()}
             >
               <label htmlFor="newsletter" className="sr-only">
@@ -106,7 +107,7 @@ export function Footer() {
               </p>
             </address>
 
-            <div className="mt-8 flex justify-center gap-4 lg:justify-start">
+            <div className="mt-8 flex gap-4">
               <a
                 href={SITE.social.instagram}
                 aria-label="Instagram"
@@ -129,7 +130,7 @@ export function Footer() {
           </Reveal>
         </div>
 
-        <div className="flex flex-col items-center gap-3 border-t border-cream/10 py-8 text-center text-[0.625rem] uppercase tracking-[0.22em] text-cream/40 sm:flex-row sm:items-center sm:justify-between sm:text-left">
+        <div className="flex flex-col gap-3 border-t border-cream/10 py-8 text-[0.625rem] uppercase tracking-[0.22em] text-cream/40 sm:flex-row sm:items-center sm:justify-between">
           <span>
             {SITE.city} · {SITE.country}
           </span>
