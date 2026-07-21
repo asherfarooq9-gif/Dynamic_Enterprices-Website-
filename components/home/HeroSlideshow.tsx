@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useIsMobileViewport } from '@/hooks/useIsMobileViewport';
 
 const SLIDES = [
   '/images/hero-slideshow/1.jpg',
@@ -24,6 +25,7 @@ export function HeroSlideshow() {
   const [index, setIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobileViewport();
 
   useEffect(() => {
     const el = containerRef.current;
@@ -51,7 +53,7 @@ export function HeroSlideshow() {
           key={index}
           className="absolute inset-0"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1, scale: 1.08 }}
+          animate={{ opacity: 1, scale: isMobile ? 1 : 1.08 }}
           exit={{ opacity: 0 }}
           transition={{
             opacity: { duration: 1.2, ease: 'easeInOut' },
@@ -65,7 +67,7 @@ export function HeroSlideshow() {
             fill
             priority={index === 0}
             sizes="100vw"
-            className="object-cover"
+            className={isMobile ? 'object-contain' : 'object-cover'}
           />
         </motion.div>
       </AnimatePresence>
