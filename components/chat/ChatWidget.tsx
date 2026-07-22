@@ -172,7 +172,7 @@ export function ChatWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.98 }}
             transition={{ duration: 0.3, ease: EASE.expo }}
-            className="fixed inset-x-4 bottom-[calc(9rem+env(safe-area-inset-bottom))] z-50 flex max-h-[70vh] flex-col overflow-hidden rounded-2xl bg-white shadow-premium sm:inset-x-auto sm:right-6 sm:bottom-[calc(9.5rem+env(safe-area-inset-bottom))] sm:w-[380px]"
+            className="fixed inset-x-4 bottom-[calc(9rem+env(safe-area-inset-bottom))] z-50 flex max-h-[min(70dvh,34rem)] flex-col overflow-hidden rounded-2xl bg-white shadow-premium sm:inset-x-auto sm:right-6 sm:bottom-[calc(9.5rem+env(safe-area-inset-bottom))] sm:w-[380px]"
           >
             <div className="bg-navy px-5 py-4">
               <p className="text-small font-bold text-white">{SITE.name}</p>
@@ -204,7 +204,7 @@ export function ChatWidget() {
               <button
                 type="submit"
                 disabled={isSending || !input.trim()}
-                className="rounded-full bg-navy px-4 py-2 text-[0.6875rem] font-bold uppercase tracking-[0.2em] text-white disabled:opacity-50"
+                className="shrink-0 rounded-full bg-navy px-3 py-2 text-[0.6875rem] font-bold uppercase tracking-[0.2em] text-white disabled:opacity-50 sm:px-4"
               >
                 Send
               </button>
