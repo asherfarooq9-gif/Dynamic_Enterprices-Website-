@@ -160,7 +160,7 @@ export function ChatWidget() {
         aria-label={isOpen ? 'Close chat' : 'Open chat'}
         onClick={() => setIsOpen((prev) => !prev)}
         whileTap={{ scale: 0.94 }}
-        className="fixed bottom-[calc(4.75rem+env(safe-area-inset-bottom))] right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-navy text-white shadow-large sm:bottom-[calc(5.25rem+env(safe-area-inset-bottom))] sm:right-6"
+        className="fixed bottom-[calc(4.75rem+env(safe-area-inset-bottom))] right-4 z-[60] flex h-14 w-14 items-center justify-center rounded-full bg-navy text-white shadow-large sm:bottom-[calc(5.25rem+env(safe-area-inset-bottom))] sm:right-6"
       >
         {isOpen ? <FaTimes size={20} /> : <FaCommentDots size={20} />}
       </motion.button>
@@ -172,9 +172,9 @@ export function ChatWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.98 }}
             transition={{ duration: 0.3, ease: EASE.expo }}
-            className="fixed inset-x-4 bottom-[calc(9rem+env(safe-area-inset-bottom))] z-50 flex max-h-[min(70dvh,34rem)] flex-col overflow-hidden rounded-2xl bg-white shadow-premium sm:inset-x-auto sm:right-6 sm:bottom-[calc(9.5rem+env(safe-area-inset-bottom))] sm:w-[380px]"
+            className="fixed inset-0 z-50 flex h-dvh w-full flex-col overflow-hidden bg-white sm:inset-x-auto sm:inset-y-auto sm:bottom-[calc(9.5rem+env(safe-area-inset-bottom))] sm:right-6 sm:h-auto sm:max-h-[min(70dvh,34rem)] sm:w-[380px] sm:rounded-2xl sm:shadow-premium"
           >
-            <div className="bg-navy px-5 py-4">
+            <div className="bg-navy px-5 py-4 pt-[calc(1rem+env(safe-area-inset-top))] sm:pt-4">
               <p className="text-small font-bold text-white">{SITE.name}</p>
               <p className="text-[0.6875rem] text-white/60">Usually replies in a few minutes</p>
             </div>
