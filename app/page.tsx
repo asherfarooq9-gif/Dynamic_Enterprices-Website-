@@ -4,6 +4,7 @@ import { ServicesCards } from '@/components/home/ServicesCards';
 import { Stats } from '@/components/home/Stats';
 import { WorkMarquee } from '@/components/home/WorkMarquee';
 import { Method } from '@/components/home/Method';
+import { AtmosphereReel } from '@/components/home/AtmosphereReel';
 import { FounderStory } from '@/components/home/FounderStory';
 import { Testimonials } from '@/components/home/Testimonials';
 import { FinalCta } from '@/components/home/FinalCta';
@@ -42,6 +43,7 @@ export default function HomePage() {
       <Stats />
       <WorkMarquee />
       <Method />
+      <AtmosphereReel />
       <FounderStory />
       <Testimonials />
       <FinalCta />

@@ -4,14 +4,21 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
 
-const SLIDES = [
+const DEFAULT_SLIDES = [
   '/images/hero-slideshow/1.jpg',
   '/images/hero-slideshow/2.jpg',
   '/images/hero-slideshow/3.jpg',
   '/images/hero-slideshow/4.jpg',
 ] as const;
 
-const SLIDE_DURATION = 5000;
+const DEFAULT_SLIDE_DURATION = 5000;
+
+interface HeroSlideshowProps {
+  /** Defaults to the homepage hero set. Pass a different set to reuse the
+   * same crossfade behavior elsewhere (e.g. the Work hero's project photos). */
+  images?: readonly string[];
+  slideDuration?: number;
+}
 
 /**
  * Full-bleed crossfade — one slide at a time, each holding a slow Ken Burns
@@ -20,7 +27,10 @@ const SLIDE_DURATION = 5000;
  * both animating independently, so the transition reads as a single
  * continuous dissolve.
  */
-export function HeroSlideshow() {
+export function HeroSlideshow({
+  images = DEFAULT_SLIDES,
+  slideDuration = DEFAULT_SLIDE_DURATION,
+}: HeroSlideshowProps) {
   const [index, setIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -39,10 +49,10 @@ export function HeroSlideshow() {
   useEffect(() => {
     if (!isVisible) return;
     const id = setInterval(() => {
-      setIndex((i) => (i + 1) % SLIDES.length);
-    }, SLIDE_DURATION);
+      setIndex((i) => (i + 1) % images.length);
+    }, slideDuration);
     return () => clearInterval(id);
-  }, [isVisible]);
+  }, [isVisible, images.length, slideDuration]);
 
   return (
     <div ref={containerRef} className="absolute inset-0 overflow-hidden">
@@ -55,11 +65,11 @@ export function HeroSlideshow() {
           exit={{ opacity: 0 }}
           transition={{
             opacity: { duration: 1.2, ease: 'easeInOut' },
-            scale: { duration: SLIDE_DURATION / 1000 + 1.2, ease: 'linear' },
+            scale: { duration: slideDuration / 1000 + 1.2, ease: 'linear' },
           }}
         >
           <Image
-            src={SLIDES[index]}
+            src={images[index]}
             alt=""
             aria-hidden
             fill
