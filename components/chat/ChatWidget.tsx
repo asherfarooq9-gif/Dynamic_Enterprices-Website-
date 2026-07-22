@@ -38,9 +38,9 @@ function extractLead(text: string): Lead | null {
     if (
       parsed !== null &&
       typeof parsed === 'object' &&
-      'name' in parsed &&
-      'contact' in parsed &&
-      'need' in parsed
+      typeof (parsed as Record<string, unknown>).name === 'string' &&
+      typeof (parsed as Record<string, unknown>).contact === 'string' &&
+      typeof (parsed as Record<string, unknown>).need === 'string'
     ) {
       return parsed as Lead;
     }
@@ -56,11 +56,15 @@ function stripLeadMarker(text: string): string {
 }
 
 async function sendLead(lead: Lead): Promise<void> {
-  await fetch('/api/chat/lead', {
+  const response = await fetch('/api/chat/lead', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(lead),
   });
+
+  if (!response.ok) {
+    throw new Error(`Lead send failed with status ${response.status}`);
+  }
 }
 
 export function ChatWidget() {
@@ -115,11 +119,31 @@ export function ChatWidget() {
         });
       }
 
+      // Flush any trailing bytes the streaming decoder held back (a
+      // multi-byte UTF-8 character can span two network reads).
+      accumulated += decoder.decode();
+      const finalDisplayText = stripLeadMarker(accumulated);
+      setMessages((prev) => {
+        const updated = [...prev];
+        updated[updated.length - 1] = { role: 'assistant', content: finalDisplayText };
+        return updated;
+      });
+
       if (!leadSent) {
         const lead = extractLead(accumulated);
         if (lead) {
           setLeadSent(true);
-          await sendLead(lead);
+          // Isolated from the outer catch: a lead-email failure must never
+          // be shown to the visitor as "the chat is having trouble" — the
+          // chat reply itself already streamed and displayed successfully.
+          try {
+            await sendLead(lead);
+          } catch (error: unknown) {
+            console.error(
+              'Lead send failed:',
+              error instanceof Error ? error.message : error,
+            );
+          }
         }
       }
     } catch {
@@ -173,6 +197,7 @@ export function ChatWidget() {
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
                 placeholder="Type a message…"
+                aria-label="Message"
                 disabled={isSending}
                 className="flex-1 rounded-full border border-navy/15 px-4 py-2 text-small text-navy outline-none focus:border-mustard-dark"
               />
