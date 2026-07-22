@@ -208,11 +208,6 @@ const requestSchema = z.object({
   messages: z.array(messageSchema).min(1).max(MAX_HISTORY),
 });
 
-const groq = new OpenAI({
-  apiKey: process.env.GROQ_API_KEY,
-  baseURL: 'https://api.groq.com/openai/v1',
-});
-
 export async function POST(request: NextRequest): Promise<Response> {
   const ip = request.headers.get('x-forwarded-for') ?? 'unknown';
 
@@ -222,7 +217,13 @@ export async function POST(request: NextRequest): Promise<Response> {
     });
   }
 
-  const body: unknown = await request.json();
+  let body: unknown;
+  try {
+    body = await request.json();
+  } catch {
+    return new Response('Invalid request.', { status: 400 });
+  }
+
   const parsed = requestSchema.safeParse(body);
 
   if (!parsed.success) {
@@ -231,6 +232,15 @@ export async function POST(request: NextRequest): Promise<Response> {
 
   let completion;
   try {
+    // Constructed per-request, inside this try/catch: the OpenAI SDK
+    // validates credentials synchronously at construction, so a missing
+    // GROQ_API_KEY must not throw at module load time (that would 500
+    // every request, including ones that never reach the API call).
+    const groq = new OpenAI({
+      apiKey: process.env.GROQ_API_KEY,
+      baseURL: 'https://api.groq.com/openai/v1',
+    });
+
     completion = await groq.chat.completions.create({
       model: 'llama-3.3-70b-versatile',
       messages: [
@@ -239,7 +249,11 @@ export async function POST(request: NextRequest): Promise<Response> {
       ],
       stream: true,
     });
-  } catch {
+  } catch (error: unknown) {
+    console.error(
+      'Groq chat completion failed:',
+      error instanceof Error ? error.message : error,
+    );
     return new Response('Upstream chat provider error.', { status: 502 });
   }
 
@@ -252,6 +266,10 @@ export async function POST(request: NextRequest): Promise<Response> {
           if (text) controller.enqueue(encoder.encode(text));
         }
       } catch (error: unknown) {
+        console.error(
+          'Chat stream error:',
+          error instanceof Error ? error.message : error,
+        );
         controller.error(error);
         return;
       }
@@ -311,17 +329,36 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { z } from 'zod';
 import { SITE } from '@/lib/site';
+import { checkRateLimit } from '@/lib/rateLimit';
 
 const leadSchema = z.object({
-  name: z.string().min(1).max(200),
-  contact: z.string().min(1).max(200),
-  need: z.string().min(1).max(1000),
+  name: z.string().trim().min(1).max(200),
+  contact: z.string().trim().min(1).max(200),
+  need: z.string().trim().min(1).max(1000),
 });
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+/** Strips CR/LF so a lead value can't inject extra lines into the email subject. */
+function sanitizeForSubject(value: string): string {
+  return value.replace(/[\r\n]+/g, ' ');
+}
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
-  const body: unknown = await request.json();
+  const ip = request.headers.get('x-forwarded-for') ?? 'unknown';
+
+  if (!checkRateLimit(ip)) {
+    return NextResponse.json(
+      { error: 'Too many requests. Try again in a minute.' },
+      { status: 429 },
+    );
+  }
+
+  let body: unknown;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: 'Invalid lead data.' }, { status: 400 });
+  }
+
   const parsed = leadSchema.safeParse(body);
 
   if (!parsed.success) {
@@ -331,13 +368,23 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   const { name, contact, need } = parsed.data;
 
   try {
+    // Constructed per-request, inside this try/catch: matches the same
+    // defensive pattern as app/api/chat/route.ts — a client SDK that
+    // validates credentials synchronously at construction must not throw
+    // at module load time.
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
     await resend.emails.send({
       from: `${SITE.name} Chatbot <onboarding@resend.dev>`,
       to: SITE.email,
-      subject: `New chatbot lead: ${name}`,
+      subject: `New chatbot lead: ${sanitizeForSubject(name)}`,
       text: `Name: ${name}\nContact: ${contact}\nNeed: ${need}`,
     });
-  } catch {
+  } catch (error: unknown) {
+    console.error(
+      'Resend lead email failed:',
+      error instanceof Error ? error.message : error,
+    );
     return NextResponse.json({ error: 'Failed to send lead email.' }, { status: 502 });
   }
 
@@ -476,9 +523,9 @@ function extractLead(text: string): Lead | null {
     if (
       parsed !== null &&
       typeof parsed === 'object' &&
-      'name' in parsed &&
-      'contact' in parsed &&
-      'need' in parsed
+      typeof (parsed as Record<string, unknown>).name === 'string' &&
+      typeof (parsed as Record<string, unknown>).contact === 'string' &&
+      typeof (parsed as Record<string, unknown>).need === 'string'
     ) {
       return parsed as Lead;
     }
@@ -494,11 +541,15 @@ function stripLeadMarker(text: string): string {
 }
 
 async function sendLead(lead: Lead): Promise<void> {
-  await fetch('/api/chat/lead', {
+  const response = await fetch('/api/chat/lead', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(lead),
   });
+
+  if (!response.ok) {
+    throw new Error(`Lead send failed with status ${response.status}`);
+  }
 }
 
 export function ChatWidget() {
@@ -553,11 +604,31 @@ export function ChatWidget() {
         });
       }
 
+      // Flush any trailing bytes the streaming decoder held back (a
+      // multi-byte UTF-8 character can span two network reads).
+      accumulated += decoder.decode();
+      const finalDisplayText = stripLeadMarker(accumulated);
+      setMessages((prev) => {
+        const updated = [...prev];
+        updated[updated.length - 1] = { role: 'assistant', content: finalDisplayText };
+        return updated;
+      });
+
       if (!leadSent) {
         const lead = extractLead(accumulated);
         if (lead) {
           setLeadSent(true);
-          await sendLead(lead);
+          // Isolated from the outer catch: a lead-email failure must never
+          // be shown to the visitor as "the chat is having trouble" — the
+          // chat reply itself already streamed and displayed successfully.
+          try {
+            await sendLead(lead);
+          } catch (error: unknown) {
+            console.error(
+              'Lead send failed:',
+              error instanceof Error ? error.message : error,
+            );
+          }
         }
       }
     } catch {
@@ -611,6 +682,7 @@ export function ChatWidget() {
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
                 placeholder="Type a message…"
+                aria-label="Message"
                 disabled={isSending}
                 className="flex-1 rounded-full border border-navy/15 px-4 py-2 text-small text-navy outline-none focus:border-mustard-dark"
               />

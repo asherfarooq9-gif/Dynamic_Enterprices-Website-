@@ -44,15 +44,15 @@ export async function POST(request: NextRequest): Promise<Response> {
   try {
     // Constructed per-request, inside this try/catch: the OpenAI SDK
     // validates credentials synchronously at construction, so a missing
-    // GROQ_API_KEY must not throw at module load time (that would 500
+    // OPENROUTER_API_KEY must not throw at module load time (that would 500
     // every request, including ones that never reach the API call).
-    const groq = new OpenAI({
-      apiKey: process.env.GROQ_API_KEY,
-      baseURL: 'https://api.groq.com/openai/v1',
+    const openrouter = new OpenAI({
+      apiKey: process.env.OPENROUTER_API_KEY,
+      baseURL: 'https://openrouter.ai/api/v1',
     });
 
-    completion = await groq.chat.completions.create({
-      model: 'llama-3.3-70b-versatile',
+    completion = await openrouter.chat.completions.create({
+      model: 'openrouter/free',
       messages: [
         { role: 'system', content: buildSystemPrompt() },
         ...parsed.data.messages,
@@ -61,7 +61,7 @@ export async function POST(request: NextRequest): Promise<Response> {
     });
   } catch (error: unknown) {
     console.error(
-      'Groq chat completion failed:',
+      'OpenRouter chat completion failed:',
       error instanceof Error ? error.message : error,
     );
     return new Response('Upstream chat provider error.', { status: 502 });
