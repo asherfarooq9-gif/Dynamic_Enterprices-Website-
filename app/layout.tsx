@@ -6,6 +6,7 @@ import { SITE } from '@/lib/site';
 import { Nav } from '@/components/layout/Nav';
 import { Footer } from '@/components/layout/Footer';
 import { ServiceSwitcher } from '@/components/services/ServiceSwitcher';
+import { ChatWidget } from '@/components/chat/ChatWidget';
 import { SmoothScroll } from '@/components/motion/SmoothScroll';
 import { PageTransition } from '@/components/motion/PageTransition';
 import { LoadingScreen } from '@/components/motion/LoadingScreen';
@@ -149,6 +150,7 @@ export default function RootLayout({
             className="h-[calc(3.75rem+env(safe-area-inset-bottom))] sm:h-[4.25rem]"
           />
           <ServiceSwitcher />
+          <ChatWidget />
         </SmoothScroll>
       </body>
     </html>
