@@ -1,7 +1,6 @@
 export const SITE = {
   name: 'Dynamic Enterprises',
   shortName: 'DYNAMIC',
-  // REPLACE: confirm production domain before launch.
   url: 'https://www.dynamicenterprises.pk',
   founded: 2017,
   foundedRoman: 'MMXVII',

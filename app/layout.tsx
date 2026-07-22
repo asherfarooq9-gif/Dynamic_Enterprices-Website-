@@ -3,7 +3,6 @@ import { Roboto, Homemade_Apple } from 'next/font/google';
 import './globals.css';
 
 import { SITE } from '@/lib/site';
-import { TESTIMONIALS } from '@/content/about';
 import { Nav } from '@/components/layout/Nav';
 import { Footer } from '@/components/layout/Footer';
 import { ServiceSwitcher } from '@/components/services/ServiceSwitcher';
@@ -89,6 +88,20 @@ export default function RootLayout({
     },
     description: SITE.description,
     sameAs: ['https://www.instagram.com/dynamicenterprises25'],
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday',
+      ],
+      opens: '00:00',
+      closes: '23:59',
+    },
   };
 
   const websiteSchema = {
@@ -97,14 +110,6 @@ export default function RootLayout({
     name: SITE.name,
     url: SITE.url,
   };
-
-  const reviewSchema = TESTIMONIALS.map((testimonial) => ({
-    '@context': 'https://schema.org',
-    '@type': 'Review',
-    itemReviewed: { '@type': 'ProfessionalService', name: SITE.name },
-    reviewBody: testimonial.quote,
-    author: { '@type': 'Person', name: testimonial.author },
-  }));
 
   return (
     <html lang="en" className={`${roboto.variable} ${script.variable}`}>
@@ -121,16 +126,6 @@ export default function RootLayout({
             __html: JSON.stringify(websiteSchema),
           }}
         />
-        {reviewSchema.map((review, i) => (
-          <script
-            key={i}
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify(review),
-            }}
-          />
-        ))}
-
         <LoadingScreen />
         <ScrollProgress />
 

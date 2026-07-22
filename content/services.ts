@@ -4,6 +4,8 @@ export interface Service {
   id: string;
   index: string;
   title: string;
+  /** Keyword-rich <title> tag for this service's detail page — distinct from the short on-page `title` used in headings/cards. */
+  metaTitle: string;
   short: string;
   body: string;
   /** Standalone SEO meta description for this service's detail page (120-160 chars, no shared suffix). */
@@ -33,6 +35,7 @@ export const SERVICES: readonly Service[] = [
     id: 'interior',
     index: '01',
     title: 'Interior',
+    metaTitle: 'Interior Design & Turnkey Fit-Out Karachi',
     short: 'Turnkey interiors, drawn and delivered by one accountable studio.',
     metaDescription:
       'Turnkey interior design and fit-out in Karachi — concept to handover under one accountable studio, from spatial design to bespoke joinery.',
@@ -55,6 +58,7 @@ export const SERVICES: readonly Service[] = [
     id: 'supplies',
     index: '02',
     title: 'Supplies',
+    metaTitle: 'FF&E Supplies & Procurement Pakistan',
     short:
       'From interior fit-out to hospital floors, sourced and supplied without a gap in the chain.',
     metaDescription:
@@ -77,6 +81,7 @@ export const SERVICES: readonly Service[] = [
     id: 'corporate-films',
     index: '03',
     title: 'Corporate Films',
+    metaTitle: 'Corporate & Architectural Film Production Karachi',
     short: 'Films that make the work look the way it felt to stand in it.',
     metaDescription:
       'Corporate and architectural films shot, cut and graded in Karachi — brand films, launch films and campaign work for clients like Zong and PepsiCo.',
@@ -98,6 +103,7 @@ export const SERVICES: readonly Service[] = [
     id: 'scrub-uniforms',
     index: '04',
     title: 'Scrub & Uniforms',
+    metaTitle: 'Medical Scrubs & Uniform Manufacturer Pakistan',
     short: 'Uniforms specified like furniture — to a standard, not a guess.',
     metaDescription:
       'Medical scrubs, hospitality and corporate uniforms manufactured at scale in Pakistan — fabric sourcing, embroidery and size-run fulfilment in-house.',

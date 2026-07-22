@@ -25,16 +25,16 @@ export function generateMetadata({ params }: ServiceDetailPageProps): Metadata {
   if (!service) return {};
 
   return {
-    title: service.title,
+    title: service.metaTitle,
     description: service.metaDescription,
     alternates: { canonical: `/services/${service.id}` },
     openGraph: {
-      title: `${service.title} — ${SITE.name}`,
+      title: `${service.metaTitle} — ${SITE.name}`,
       description: service.metaDescription,
       url: `${SITE.url}/services/${service.id}`,
     },
     twitter: {
-      title: `${service.title} — ${SITE.name}`,
+      title: `${service.metaTitle} — ${SITE.name}`,
       description: service.metaDescription,
     },
   };
