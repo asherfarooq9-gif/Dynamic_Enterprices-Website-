@@ -27,7 +27,13 @@ export async function POST(request: NextRequest): Promise<Response> {
     });
   }
 
-  const body: unknown = await request.json();
+  let body: unknown;
+  try {
+    body = await request.json();
+  } catch {
+    return new Response('Invalid request.', { status: 400 });
+  }
+
   const parsed = requestSchema.safeParse(body);
 
   if (!parsed.success) {
@@ -53,7 +59,11 @@ export async function POST(request: NextRequest): Promise<Response> {
       ],
       stream: true,
     });
-  } catch {
+  } catch (error: unknown) {
+    console.error(
+      'Groq chat completion failed:',
+      error instanceof Error ? error.message : error,
+    );
     return new Response('Upstream chat provider error.', { status: 502 });
   }
 
@@ -66,6 +76,10 @@ export async function POST(request: NextRequest): Promise<Response> {
           if (text) controller.enqueue(encoder.encode(text));
         }
       } catch (error: unknown) {
+        console.error(
+          'Chat stream error:',
+          error instanceof Error ? error.message : error,
+        );
         controller.error(error);
         return;
       }
