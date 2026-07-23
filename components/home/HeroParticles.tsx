@@ -54,10 +54,9 @@ function paintWordmark(
 }
 
 interface HeroParticlesProps {
-  /** Fires once the word has geometrically formed — cue for the rest of the
-   * hero (tagline, footer row) to reveal, timed with the wordmark's own
-   * final resolve rather than a separate later beat. */
-  onSettled: () => void;
+  /** Fires once the word has geometrically formed. Optional — the canvas
+   * animation runs independently of this callback. */
+  onSettled?: () => void;
 }
 
 /**
@@ -77,7 +76,7 @@ export function HeroParticles({ onSettled }: HeroParticlesProps) {
 
   useEffect(() => {
     if (prefersReduced) {
-      onSettledRef.current();
+      onSettledRef.current?.();
       return;
     }
 
@@ -203,7 +202,7 @@ export function HeroParticles({ onSettled }: HeroParticlesProps) {
 
       if (!hasSettled && frameCount >= resolveStart) {
         hasSettled = true;
-        onSettledRef.current();
+        onSettledRef.current?.();
       }
 
       if (resolveT >= 1) {

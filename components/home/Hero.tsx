@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { HeroParticles } from './HeroParticles';
@@ -19,7 +18,6 @@ import { SITE, DISCIPLINES } from '@/lib/site';
  */
 export function Hero() {
   const prefersReduced = useReducedMotion();
-  const [isSettled, setIsSettled] = useState(false);
 
   return (
     <section className="relative h-svh min-h-[36rem] w-full overflow-hidden bg-hero-radial">
@@ -57,7 +55,7 @@ export function Hero() {
       {/* The sawdust falls and packs itself into the wordmark, and stays that
           way — the only visual for the name. No second layer crossfades in
           over it. */}
-      <HeroParticles onSettled={() => setIsSettled(true)} />
+      <HeroParticles />
 
       <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
         {/* Normally invisible — the canvas above is what a sighted visitor
@@ -76,12 +74,8 @@ export function Hero() {
         <motion.p
           className="mt-10 max-w-lg text-[clamp(0.9375rem,0.75rem+0.9vw,1.375rem)] font-bold uppercase text-cream/80"
           initial={{ opacity: 0, y: 12, letterSpacing: '0.5em' }}
-          animate={
-            isSettled
-              ? { opacity: 1, y: 0, letterSpacing: '0.08em' }
-              : { opacity: 0, y: 12, letterSpacing: '0.5em' }
-          }
-          transition={{ duration: 0.9, ease: EASE.expo, delay: 0.2 }}
+          animate={{ opacity: 1, y: 0, letterSpacing: '0.08em' }}
+          transition={{ duration: 0.9, ease: EASE.expo, delay: 0.6 }}
         >
           {SITE.tagline}
         </motion.p>
