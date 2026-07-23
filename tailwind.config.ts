@@ -108,12 +108,12 @@ const config: Config = {
       animation: {
         marquee: 'marquee 38s linear infinite',
         'hero-tagline':
-          'hero-tagline 0.9s cubic-bezier(0.16,1,0.3,1) 0.6s both',
-        'split-word': 'split-word 0.9s cubic-bezier(0.16,1,0.3,1) both',
+          'hero-tagline 0.4s cubic-bezier(0.16,1,0.3,1) 0.1s both',
+        'split-word': 'split-word 0.5s cubic-bezier(0.16,1,0.3,1) both',
         'fade-up-title':
-          'fade-up 0.9s cubic-bezier(0.16,1,0.3,1) 0.5s both',
+          'fade-up 0.4s cubic-bezier(0.16,1,0.3,1) 0.1s both',
         'fade-up-tagline':
-          'fade-up 0.9s cubic-bezier(0.16,1,0.3,1) 0.65s both',
+          'fade-up 0.4s cubic-bezier(0.16,1,0.3,1) 0.2s both',
       },
       backgroundImage: {
         'hero-radial':
