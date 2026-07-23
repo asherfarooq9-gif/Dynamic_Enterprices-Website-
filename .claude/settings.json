@@ -193,7 +193,16 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:4173/)",
       "Bash(npx --yes lighthouse http://localhost:4173/ --output=json --output-path=\"C:/Users/Alli/AppData/Local/Temp/claude/d--Websites-dynamic-enterprises-2/40f6b534-002f-443c-be20-e9e5779d1adc/scratchpad/lh-local.json\" --chrome-flags=\"--headless --no-sandbox\" --only-categories=performance --quiet)",
       "Bash(npx --yes lighthouse https://www.dynamicenterprises.pk --output=json --output-path=\"C:/Users/Alli/AppData/Local/Temp/claude/d--Websites-dynamic-enterprises-2/40f6b534-002f-443c-be20-e9e5779d1adc/scratchpad/lh-deployed-after.json\" --chrome-flags=\"--headless --no-sandbox\" --only-categories=performance --quiet)",
-      "Bash(npx --yes lighthouse https://www.dynamicenterprises.pk --output=json --output-path=\"C:/Users/Alli/AppData/Local/Temp/claude/d--Websites-dynamic-enterprises-2/40f6b534-002f-443c-be20-e9e5779d1adc/scratchpad/lh-deployed-v3.json\" --chrome-flags=\"--headless --no-sandbox\" --only-categories=performance --quiet)"
+      "Bash(npx --yes lighthouse https://www.dynamicenterprises.pk --output=json --output-path=\"C:/Users/Alli/AppData/Local/Temp/claude/d--Websites-dynamic-enterprises-2/40f6b534-002f-443c-be20-e9e5779d1adc/scratchpad/lh-deployed-v3.json\" --chrome-flags=\"--headless --no-sandbox\" --only-categories=performance --quiet)",
+      "Bash(npx --yes lighthouse https://www.dynamicenterprises.pk --output=json --output-path=\"C:/Users/Alli/AppData/Local/Temp/claude/d--Websites-dynamic-enterprises-2/40f6b534-002f-443c-be20-e9e5779d1adc/scratchpad/lh-final.json\" --chrome-flags=\"--headless --no-sandbox\" --only-categories=performance --quiet)",
+      "Bash(NODE_PATH=\"d:/Websites/dynamic enterprises 2/node_modules\" node \"C:/Users/Alli/AppData/Local/Temp/claude/d--Websites-dynamic-enterprises-2/40f6b534-002f-443c-be20-e9e5779d1adc/scratchpad/real-browser-audit.js\")",
+      "Bash(curl -s -D - -o /dev/null \"https://www.dynamicenterprises.pk/\" --max-time 15)",
+      "Bash(curl -s -o /dev/null -w \"DNS: %{time_namelookup}s\\\\nConnect: %{time_connect}s\\\\nTLS: %{time_appconnect}s\\\\nTTFB: %{time_starttransfer}s\\\\nTotal: %{time_total}s\\\\n\" \"https://www.dynamicenterprises.pk/\" --max-time 15)",
+      "Bash(nslookup www.dynamicenterprises.pk)",
+      "Bash(nslookup dynamicenterprises.pk)",
+      "Bash(curl -s -o /dev/null -w \"HTTP Version: %{http_version}\\\\nTLS: %{ssl_verify_result}\\\\n\" --http2 \"https://www.dynamicenterprises.pk/\" -v)",
+      "Bash(curl -s -o /dev/null -v --http2 \"https://www.dynamicenterprises.pk/\")",
+      "Bash(openssl s_client -connect www.dynamicenterprises.pk:443 -servername www.dynamicenterprises.pk -tls1_3)"
     ],
     "deny": [
       "Bash(rm -rf *)",
