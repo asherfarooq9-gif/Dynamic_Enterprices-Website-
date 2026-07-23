@@ -50,6 +50,8 @@ export function ServiceVideoHero({ title, tagline, videoSrc, posterSrc }: Servic
           disableRemotePlayback
           preload="auto"
           poster={posterSrc}
+          // @ts-expect-error -- fetchPriority is valid on <video> in browsers but not yet in React's DOM typings
+          fetchPriority="high"
         >
           <source src={videoSrc} type="video/mp4" />
         </video>
