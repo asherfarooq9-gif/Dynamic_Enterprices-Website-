@@ -2,8 +2,6 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { EASE } from '@/lib/motion';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 interface ServiceVideoHeroProps {
@@ -76,22 +74,12 @@ export function ServiceVideoHero({ title, tagline, videoSrc, posterSrc }: Servic
       </nav>
 
       <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
-        <motion.h1
-          initial={prefersReduced ? undefined : { opacity: 0, y: 24 }}
-          animate={prefersReduced ? undefined : { opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: EASE.expo, delay: 0.5 }}
-          className="text-hero max-w-3xl font-bold uppercase leading-[0.92] text-white"
-        >
+        <h1 className="text-hero max-w-3xl font-bold uppercase leading-[0.92] text-white motion-safe:animate-fade-up-title">
           {title}
-        </motion.h1>
-        <motion.p
-          initial={prefersReduced ? undefined : { opacity: 0, y: 16 }}
-          animate={prefersReduced ? undefined : { opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: EASE.expo, delay: 0.65 }}
-          className="mt-6 max-w-lg text-lead text-cream/70"
-        >
+        </h1>
+        <p className="mt-6 max-w-lg text-lead text-cream/70 motion-safe:animate-fade-up-tagline">
           {tagline}
-        </motion.p>
+        </p>
       </div>
     </section>
   );
