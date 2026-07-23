@@ -25,12 +25,12 @@ const LABEL_CLASS =
 
 /**
  * Floating-label fields (label sits inline until the field has focus or a
- * value, then rises out of the way) with RHF + Zod validation. Submission has
- * no backend yet — it simulates success client-side so the interaction can be
- * reviewed end-to-end; wire to a real endpoint before launch.
+ * value, then rises out of the way) with RHF + Zod validation. Submits to
+ * /api/contact, which emails the studio via Resend.
  */
 export function ContactForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -38,10 +38,30 @@ export function ContactForm() {
     reset,
   } = useForm<ContactValues>({ resolver: zodResolver(contactSchema) });
 
-  const onSubmit = async (): Promise<void> => {
-    await new Promise((resolve) => setTimeout(resolve, 600));
-    setIsSubmitted(true);
-    reset();
+  const onSubmit = async (values: ContactValues): Promise<void> => {
+    setSubmitError(null);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+      });
+
+      if (!response.ok) {
+        setSubmitError(
+          'Message could not be sent — please try again or email us directly.',
+        );
+        return;
+      }
+
+      setIsSubmitted(true);
+      reset();
+    } catch {
+      setSubmitError(
+        'Message could not be sent — please try again or email us directly.',
+      );
+    }
   };
 
   return (
@@ -143,6 +163,10 @@ export function ContactForm() {
               </p>
             )}
           </div>
+
+          {submitError && (
+            <p className="text-[0.6875rem] text-red-600">{submitError}</p>
+          )}
 
           <button
             type="submit"
