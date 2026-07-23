@@ -1,10 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 import { HeroParticles } from './HeroParticles';
 import { HeroSlideshow } from './HeroSlideshow';
-import { EASE } from '@/lib/motion';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { SITE, DISCIPLINES } from '@/lib/site';
 
@@ -71,14 +69,11 @@ export function Hero() {
           </span>
         </h1>
 
-        <motion.p
-          className="mt-10 max-w-lg text-[clamp(0.9375rem,0.75rem+0.9vw,1.375rem)] font-bold uppercase text-cream/80"
-          initial={{ opacity: 0, y: 12, letterSpacing: '0.5em' }}
-          animate={{ opacity: 1, y: 0, letterSpacing: '0.08em' }}
-          transition={{ duration: 0.9, ease: EASE.expo, delay: 0.6 }}
+        <p
+          className="mt-10 max-w-lg text-[clamp(0.9375rem,0.75rem+0.9vw,1.375rem)] font-bold uppercase text-cream/80 motion-safe:animate-hero-tagline"
         >
           {SITE.tagline}
-        </motion.p>
+        </p>
       </div>
 
       {/* Vignette. */}

@@ -84,9 +84,28 @@ const config: Config = {
           from: { transform: 'translate3d(0, 0, 0)' },
           to: { transform: 'translate3d(-50%, 0, 0)' },
         },
+        'hero-tagline': {
+          from: {
+            opacity: '0',
+            transform: 'translateY(12px)',
+            letterSpacing: '0.5em',
+          },
+          to: {
+            opacity: '1',
+            transform: 'translateY(0)',
+            letterSpacing: '0.08em',
+          },
+        },
+        'split-word': {
+          from: { transform: 'translateY(100%)' },
+          to: { transform: 'translateY(0%)' },
+        },
       },
       animation: {
         marquee: 'marquee 38s linear infinite',
+        'hero-tagline':
+          'hero-tagline 0.9s cubic-bezier(0.16,1,0.3,1) 0.6s both',
+        'split-word': 'split-word 0.9s cubic-bezier(0.16,1,0.3,1) both',
       },
       backgroundImage: {
         'hero-radial':

@@ -1,7 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { EASE, STAGGER, VIEWPORT } from '@/lib/motion';
+import { STAGGER } from '@/lib/motion';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { cn } from '@/lib/cn';
 
@@ -19,6 +18,11 @@ interface SplitTextProps {
  * Word-level reveal under a per-line mask, so words rise out of the line
  * rather than fading in place. This is the site's headline motion — the one
  * gesture that repeats, because a house style needs one thing that repeats.
+ *
+ * Driven by a CSS keyframe (`split-word` in tailwind.config.ts) rather than
+ * framer-motion: the stagger is just a per-word `animation-delay`, so the
+ * reveal starts at paint time instead of waiting on JS hydration — this text
+ * is the LCP candidate on every hero that uses it.
  */
 export function SplitText({
   text,
@@ -48,36 +52,25 @@ export function SplitText({
         const words = line.split(' ');
         return (
           <span key={lineIndex} className="block overflow-hidden pb-[0.06em]">
-            <motion.span
-              className="block"
-              initial="hidden"
-              whileInView="visible"
-              viewport={VIEWPORT}
-              transition={{
-                staggerChildren: STAGGER.tight,
-                delayChildren: delay + lineIndex * 0.06,
-              }}
-            >
+            <span className="block">
               {words.map((word, wordIndex) => (
-                <motion.span
+                <span
                   key={wordIndex}
                   className={cn(
-                    'inline-block',
+                    'inline-block motion-safe:animate-split-word',
                     accent && word === accent && 'text-mustard',
                   )}
-                  variants={{
-                    hidden: { y: '100%' },
-                    visible: {
-                      y: '0%',
-                      transition: { duration: 0.9, ease: EASE.expo },
-                    },
+                  style={{
+                    animationDelay: `${
+                      delay + lineIndex * 0.06 + wordIndex * STAGGER.tight
+                    }s`,
                   }}
                 >
                   {word}
-                  {wordIndex < words.length - 1 && ' '}
-                </motion.span>
+                  {wordIndex < words.length - 1 && ' '}
+                </span>
               ))}
-            </motion.span>
+            </span>
           </span>
         );
       })}
