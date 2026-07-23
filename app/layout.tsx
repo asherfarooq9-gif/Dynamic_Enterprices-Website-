@@ -1,16 +1,20 @@
 import type { Metadata, Viewport } from 'next';
 import { Roboto, Homemade_Apple } from 'next/font/google';
+import dynamic from 'next/dynamic';
 import './globals.css';
 
 import { SITE } from '@/lib/site';
 import { Nav } from '@/components/layout/Nav';
 import { Footer } from '@/components/layout/Footer';
 import { ServiceSwitcher } from '@/components/services/ServiceSwitcher';
-import { ChatWidget } from '@/components/chat/ChatWidget';
 import { SmoothScroll } from '@/components/motion/SmoothScroll';
 import { PageTransition } from '@/components/motion/PageTransition';
 import { LoadingScreen } from '@/components/motion/LoadingScreen';
 import { ScrollProgress } from '@/components/motion/ScrollProgress';
+
+const ChatWidget = dynamic(() =>
+  import('@/components/chat/ChatWidget').then((mod) => mod.ChatWidget),
+);
 
 // Two weights. No 500. The scale jump does the hierarchy, not the weight.
 const roboto = Roboto({
